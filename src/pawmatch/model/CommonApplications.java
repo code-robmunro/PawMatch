@@ -22,7 +22,11 @@ public class CommonApplications {
     this.userId = userId;
   }
 
-  public Integer getCommonApplicationId() {
+  public CommonApplications(Integer commonApplicationId) {
+	this.commonApplicationId = commonApplicationId;
+  }
+
+public Integer getCommonApplicationId() {
     return commonApplicationId;
   }
 

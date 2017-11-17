@@ -8,26 +8,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update a User</title>
+<title>Delete a User</title>
 </head>
 <body>
-	<h1>Update BlogUser</h1>
-	<form action="userupdate" method="post">
+	<h1>${messages.title}</h1>
+	<form action="commonapplicationdelete" method="post">
 		<p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
+			<div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
+				<label for="userid">User ID</label>
+				<input id="userid" name="userid" value="${fn:escapeXml(param.userid)}">
+			</div>
 		</p>
 		<p>
-			<label for="lastname">New LastName</label>
-			<input id="lastname" name="lastname" value="">
-		</p>
-		<p>
+			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
 			<input type="submit">
+			</span>
 		</p>
 	</form>
 	<br/><br/>
-	<p>
-		<span id="successMessage"><b>${messages.success}</b></span>
-	</p>
+	
 </body>
 </html>

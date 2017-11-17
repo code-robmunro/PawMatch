@@ -8,26 +8,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a User</title>
+<title>Create a Common Application</title>
 </head>
 <body>
-	<h1>Create BlogUser</h1>
-	<form action="usercreate" method="post">
+	<h1>Create Common Application</h1>
+	<form action="commonapplicationcreate" method="post">
 		<p>
-			<label for="username">UserName</label>
-			<input id="username" name="username" value="">
+			<label for="applicationbody">Application body</label>
+			<input id="applicationbody" name="applicationbody" value="">
 		</p>
 		<p>
-			<label for="firstname">FirstName</label>
-			<input id="firstname" name="firstname" value="">
-		</p>
-		<p>
-			<label for="lastname">LastName</label>
-			<input id="lastname" name="lastname" value="">
-		</p>
-		<p>
-			<label for="dob">DoB (yyyy-mm-dd)</label>
-			<input id="dob" name="dob" value="">
+			<label for="userid">User ID</label>
+			<input id="userid" name="userid" value="">
 		</p>
 		<p>
 			<input type="submit">

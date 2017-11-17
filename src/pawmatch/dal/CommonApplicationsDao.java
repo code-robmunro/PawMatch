@@ -128,10 +128,11 @@ public class CommonApplicationsDao {
       selectStmt.setInt(1, userId);
       results = selectStmt.executeQuery();
       if(results.next()) {
-        int commonAppId = results.getInt("UserId");
-        String appBody = results.getString("ApplicationBody");
-        CommonApplications commonApp = new CommonApplications(commonAppId, appBody, userId);
-        return commonApp;
+    	Integer commonAppId = results.getInt("CommonApplicationId");
+    	String appBody = results.getString("ApplicationBody");
+        Integer resultUserId = results.getInt("UserId");
+        CommonApplications commonApp = new CommonApplications(commonAppId, appBody, resultUserId);
+        return commonApp;     
       }
     } catch (SQLException e) {
       e.printStackTrace();
