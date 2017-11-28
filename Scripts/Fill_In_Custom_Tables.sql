@@ -7,3 +7,10 @@ Species, Sex, Breed, Age, Size, HouseTrained, CoatLength, Location)
 			AND CoatLength IN ('Short', 'Medium', 'Long', '')
             AND Sex IN ('Male', 'Female', '')
         );
+        
+INSERT INTO Users (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster)
+VALUES('user1', 'a', 'b', 'a@b.com', 'asldf', 1, 1, true, false);
+        
+INSERT INTO SimplePreferences(Species, Sex, Breed, Age, Size, HouseTrained, CoatLength,
+	HasMedia, Location, ShelteredLonger, UserId)
+VALUES('Dog', 'Female', 'Labrador', 'Young', null, true, 'Short', true, 94582 , null, 1);

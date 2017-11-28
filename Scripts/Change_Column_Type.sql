@@ -538,6 +538,281 @@ ALTER TABLE Animals
 DROP Gentle, 
 CHANGE COLUMN `temp` `Gentle` BOOLEAN;
 
+#------------------------------------------
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(OKWithDogs = 'Yes',
+        TRUE,
+        IF(OKWithDogs='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP OKWithDogs, 
+CHANGE COLUMN `temp` `OKWithDogs` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(OKWithCats = 'Yes',
+        TRUE,
+        IF(OKWithCats='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP OKWithCats, 
+CHANGE COLUMN `temp` `OKWithCats` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(OKWithKids = 'Yes',
+        TRUE,
+        IF(OKWithKids='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP OKWithKids, 
+CHANGE COLUMN `temp` `OKWithKids` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(OKWithAdults = 'Yes',
+        TRUE,
+        IF(OKWithAdults='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP OKWithAdults, 
+CHANGE COLUMN `temp` `OKWithAdults` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(OKWithFarm = 'Yes',
+        TRUE,
+        IF(OKWithFarm='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP OKWithFarm, 
+CHANGE COLUMN `temp` `OKWithFarm` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(GoodWithSeniors = 'Yes',
+        TRUE,
+        IF(GoodWithSeniors='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP GoodWithSeniors, 
+CHANGE COLUMN `temp` `GoodWithSeniors` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Declawed = 'Yes',
+        TRUE,
+        IF(Declawed='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Declawed, 
+CHANGE COLUMN `temp` `Declawed` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(UpToDate = 'Yes',
+        TRUE,
+        IF(UpToDate='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP UpToDate, 
+CHANGE COLUMN `temp` `UpToDate` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Pictures = 'Yes',
+        TRUE,
+        IF(Pictures='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Pictures, 
+CHANGE COLUMN `temp` `Pictures` BOOLEAN;
+
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Videos = 'Yes',
+        TRUE,
+        IF(Videos='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Videos, 
+CHANGE COLUMN `temp` `Videos` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(ObedienceTraining = 'Yes',
+        TRUE,
+        IF(ObedienceTraining='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP ObedienceTraining, 
+CHANGE COLUMN `temp` `ObedienceTraining` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(ExerciseNeeds = 'Yes',
+        TRUE,
+        IF(ExerciseNeeds='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP ExerciseNeeds, 
+CHANGE COLUMN `temp` `ExerciseNeeds` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(GroomingNeeds = 'Yes',
+        TRUE,
+        IF(GroomingNeeds='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP GroomingNeeds, 
+CHANGE COLUMN `temp` `GroomingNeeds` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Shedding = 'Yes',
+        TRUE,
+        IF(Shedding='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Shedding, 
+CHANGE COLUMN `temp` `Shedding` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Goofy = 'Yes',
+        TRUE,
+        IF(Goofy='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Goofy, 
+CHANGE COLUMN `temp` `Goofy` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Hypoallergenic = 'Yes',
+        TRUE,
+        IF(Hypoallergenic='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Hypoallergenic, 
+CHANGE COLUMN `temp` `Hypoallergenic` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(CarTrained = 'Yes',
+        TRUE,
+        IF(CarTrained='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP CarTrained, 
+CHANGE COLUMN `temp` `CarTrained` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(LeashTrained = 'Yes',
+        TRUE,
+        IF(LeashTrained='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP LeashTrained, 
+CHANGE COLUMN `temp` `LeashTrained` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(LikesToFetch = 'Yes',
+        TRUE,
+        IF(LikesToFetch='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP LikesToFetch, 
+CHANGE COLUMN `temp` `LikesToFetch` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(LikesToys = 'Yes',
+        TRUE,
+        IF(LikesToys='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP LikesToys, 
+CHANGE COLUMN `temp` `LikesToys` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(LikesSwimming = 'Yes',
+        TRUE,
+        IF(LikesSwimming='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP LikesSwimming, 
+CHANGE COLUMN `temp` `LikesSwimming` BOOLEAN;
 
 #------------------------------------------
 
