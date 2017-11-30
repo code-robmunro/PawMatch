@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS PawMatch;
+﻿CREATE SCHEMA IF NOT EXISTS PawMatch;
 USE PawMatch;
 
 DROP TABLE IF EXISTS Pictures;
@@ -262,12 +262,13 @@ CREATE TABLE ShelterProfiles (
   Address TEXT,
   City TEXT,
   State TEXT,
+  Zip TEXT,
   Phone TEXT,
   Email TEXT,
   OrgUrl TEXT,
   FacebookUrl TEXT,
-  MeetPets ENUM('Yes', 'No', ''),
-  AllowCommonApp ENUM('Yes', 'No', ''),
+  MeetPets TEXT,
+  AllowCommonApp TEXT,
   OrganizationId INTEGER,
   CONSTRAINT pk_ShelterProfiles_ID PRIMARY KEY (ShelterProfileId),
   CONSTRAINT fk_ShelterProfiles_OrganizationId
