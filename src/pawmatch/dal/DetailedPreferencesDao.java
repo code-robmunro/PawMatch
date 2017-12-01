@@ -11,7 +11,7 @@ import pawmatch.model.DetailedPreferences;
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class DetailedPreferencesDao {
+public class DetailedPreferencesDao extends AbstractDao {
 
   private ConnectionManager connectionManager;
   private static DetailedPreferencesDao instance = null;
