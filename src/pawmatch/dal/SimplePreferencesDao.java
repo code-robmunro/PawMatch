@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pawmatch.model.Enums;
 import pawmatch.model.SimplePreferences;
 
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class SimplePreferencesDao {
+public class SimplePreferencesDao extends AbstractDao{
 
   private ConnectionManager connectionManager;
   private static SimplePreferencesDao instance = null;
@@ -104,6 +105,52 @@ public class SimplePreferencesDao {
         deleteStmt.close();
       }
     }
+  }
+
+  public SimplePreferences getSimplePrefsByUserId(int userId) throws SQLException {
+    String selectsimpleprefs =
+        "SELECT * FROM SimplePreferences WHERE userId=?;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectsimpleprefs);
+      selectStmt.setInt(1, userId);
+      results = selectStmt.executeQuery();
+      if(results.next()) {
+        Integer simplePreferencesId = results.getInt("SimplePreferencesId");
+        Enums.Species species = Enums.Species.valueOf(parseValue(results, "Species"));
+        Enums.Sex sex = Enums.Sex.valueOf(parseValue(results, "Sex"));
+        String breed = results.getString("Breed");
+        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
+        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
+        Boolean houseTrained = results.getBoolean("HouseTrained");
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
+        Boolean hasMedia = results.getBoolean("HasMedia");
+        Integer location = results.getInt("Location");
+        Boolean shelteredLonger = results.getBoolean("ShelteredLonger");
+        Integer resultUserId = results.getInt("UserId");
+
+        SimplePreferences prefs = new SimplePreferences(simplePreferencesId, species, sex, breed, age, size,
+            houseTrained, coatLength, hasMedia, location, shelteredLonger, resultUserId);
+        return prefs;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if(connection != null) {
+        connection.close();
+      }
+      if(selectStmt != null) {
+        selectStmt.close();
+      }
+      if(results != null) {
+        results.close();
+      }
+    }
+    return null;
   }
 
 }
