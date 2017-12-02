@@ -120,10 +120,10 @@ CREATE TABLE Animals (
   CONSTRAINT pk_Animals_ID PRIMARY KEY (animalID)
 );
 
-#LOAD DATA LOCAL INFILE ‘/Path/to/pet_output.csv' INTO TABLE Animals
-#  FIELDS TERMINATED BY '\t'
-#  LINES TERMINATED BY '\r\n'
-#  IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE '~/PawMatch/pet_output copy.csv' INTO TABLE Animals
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
 
 CREATE TABLE Organizations (
   OrganizationId INTEGER,
@@ -150,10 +150,10 @@ CREATE TABLE Organizations (
   CONSTRAINT pk_Organizations_ID PRIMARY KEY (OrganizationId)
 );
 
-#LOAD DATA LOCAL INFILE ‘/Path/to/org_output.csv' INTO #TABLE Organizations
- # FIELDS TERMINATED BY '\t'
- #LINES TERMINATED BY '\r\n'
- # IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE '~/PawMatch/org_output.csv' INTO TABLE Organizations
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\r\n'
+IGNORE 1 LINES;
 
 CREATE TABLE Users (
   UserId INTEGER AUTO_INCREMENT,
@@ -170,9 +170,9 @@ CREATE TABLE Users (
 );
 
 
-#LOAD DATA LOCAL INFILE ‘/Path/to/users.csv' INTO TABLE Users
-#  FIELDS TERMINATED BY ','
-#  LINES TERMINATED BY '\r\n' (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster);
+LOAD DATA LOCAL INFILE ‘/Path/to/users.csv' INTO TABLE Users
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n' (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster);
 
 CREATE TABLE SimplePreferences (
   SimplePreferencesId INTEGER AUTO_INCREMENT,

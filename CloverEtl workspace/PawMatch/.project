@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>PawMatch</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.cloveretl.gui.nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>data-in/Pet_License_Sales_Locations.csv</name>
+			<type>1</type>
+			<location>/Users/jessicamalloy/CS5200_DBMS_Cat_Superheroes/Cleaned Data/Pet_License_Sales_Locations.csv</location>
+		</link>
+	</linkedResources>
+</projectDescription>

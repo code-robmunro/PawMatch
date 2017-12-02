@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="jessicamalloy" created="Thu Nov 30 19:18:54 PST 2017" guiVersion="4.8.0.M1" id="1512100054716" licenseCode="RegCode" name="PawMatch" nature="subgraph" showComponentDetails="true">
+<Global>
+<Metadata id="Metadata7">
+<Record fieldDelimiter="|" name="CombinedLocs" recordDelimiter="\n" type="delimited">
+<Field name="Name" type="string"/>
+<Field name="StreetAddress" type="string"/>
+<Field name="City" type="string"/>
+<Field name="Zip" trim="true" type="integer"/>
+<Field name="Phone" type="string"/>
+<Field name="LocType" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata9">
+<Record fieldDelimiter="|" name="LicenseLocs_CommonFields" recordDelimiter="\n" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Agency" name="Agency" type="string"/>
+<Field label="Street Address" name="Street_Address" type="string"/>
+<Field label="Zip" name="Zip" trim="true" type="integer"/>
+<Field label="Telephone" name="Telephone" type="string"/>
+<Field name="LocType" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata4">
+<Record fieldDelimiter="|" name="Locs_CommonFields" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Zip" name="Zip" trim="true" type="integer"/>
+<Field label="Name" name="Name" type="string"/>
+<Field label="Address" name="Address" type="string"/>
+<Field label="Phone" name="Phone" type="string"/>
+<Field name="LocType" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata6">
+<Record fieldDelimiter="," name="organizations" previewAttachment="${DATAIN_DIR}/organizations.csv" previewAttachmentCharset="UTF-8" quoteChar="both" quotedStrings="true" recordDelimiter="\n" skipSourceRows="1" type="delimited">
+<Field label="OrganizationId" name="OrganizationId" type="integer"/>
+<Field label="Status" name="Status" type="string"/>
+<Field label="Name" name="Name" type="string"/>
+<Field label="Address" name="Address" type="string"/>
+<Field label="City" name="City" type="string"/>
+<Field label="State" name="State" type="string"/>
+<Field label="Zip" name="Zip" type="string"/>
+<Field label="Country" name="Country" type="string"/>
+<Field label="Phone" name="Phone" type="string"/>
+<Field label="Fax" name="Fax" type="string"/>
+<Field label="Email" name="Email" type="string"/>
+<Field label="OrgUrl" name="OrgUrl" type="string"/>
+<Field label="FacebookUrl" name="FacebookUrl" type="string"/>
+<Field label="OrgType" name="OrgType" type="string"/>
+<Field label="OrgSpecies" name="OrgSpecies" type="string"/>
+<Field label="ServeAreas" name="ServeAreas" type="string"/>
+<Field label="AdoptionProcess" name="AdoptionProcess" type="string"/>
+<Field label="MeetPets" name="MeetPets" type="string"/>
+<Field label="Services" name="Services" type="string"/>
+<Field label="AllowC/Users/jessicamalloy/Documents/workspace/PawMatch/data-in/organizations.csvommonApp" name="AllowCommonApp" type="string"/>
+<Field eofAsDelimiter="true" label="MessageOrg" name="MessageOrg" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata10" previewAttachment="./data-in/organizations.csv" previewAttachmentCharset="UTF-8">
+<Record fieldDelimiter="," name="Organizations_CommonFields" previewAttachment="./data-in/organizations.csv" previewAttachmentCharset="UTF-8" quotedStrings="true" recordDelimiter="\n" skipSourceRows="1" type="delimited">
+<Field label="Name" name="Name" type="string"/>
+<Field label="Address" name="Address" type="string"/>
+<Field label="City" name="City" type="string"/>
+<Field label="Zip" name="Zip" type="integer"/>
+<Field label="Phone" name="Phone" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata0">
+<Record fieldDelimiter="," name="Pet_License_Sales_Locations" previewAttachment="${DATAIN_DIR}/Pet_License_Sales_Locations.csv" previewAttachmentCharset="UTF-8" quoteChar="both" quotedStrings="false" recordDelimiter="\n" skipSourceRows="1" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Agency" name="Agency" type="string"/>
+<Field label="Street Address" name="Street_Address" type="string"/>
+<Field label="City" name="City_1" type="string"/>
+<Field label="Zip" name="Zip" type="integer"/>
+<Field label="Latitude" name="Latitude" type="number"/>
+<Field label="Longitude" name="Longitude" type="number"/>
+<Field label="Suite" name="Suite" type="string"/>
+<Field label="Telephone" name="Telephone" type="string"/>
+<Field label="Tags Available?" name="Tags_Available" type="string"/>
+<Field label="Mail-in Forms Available?" name="Mail_in_Forms_Available" type="string"/>
+<Field eofAsDelimiter="true" label="Notes" name="Notes" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata1">
+<Record fieldDelimiter="," name="Pet_License_Sales_Locations" previewAttachment="${DATAIN_DIR}/Pet_License_Sales_Locations.csv" previewAttachmentCharset="UTF-8" quoteChar="both" quotedStrings="false" recordDelimiter="\n" skipSourceRows="1" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Agency" name="Agency" type="string"/>
+<Field label="Street Address" name="Street_Address" type="string"/>
+<Field label="City_1" name="City_1" type="string"/>
+<Field label="Zip" name="Zip" type="integer"/>
+<Field label="Latitude" name="Latitude" type="number"/>
+<Field label="Longitude" name="Longitude" type="number"/>
+<Field label="Suite" name="Suite" type="string"/>
+<Field label="Telephone" name="Telephone" type="string"/>
+<Field label="Tags Available?" name="Tags_Available" type="string"/>
+<Field label="Mail-in Forms Available?" name="Mail_in_Forms_Available" type="string"/>
+<Field eofAsDelimiter="true" label="Notes" name="Notes" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata2">
+<Record fieldDelimiter="," name="Pet_License_Sales_Locations" previewAttachment="${DATAIN_DIR}/Pet_License_Sales_Locations.csv" previewAttachmentCharset="UTF-8" quoteChar="&quot;" quotedStrings="true" recordDelimiter="\n" skipSourceRows="1" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Agency" name="Agency" type="string"/>
+<Field label="Street Address" name="Street_Address" type="string"/>
+<Field label="City" name="City_1" type="string"/>
+<Field label="Zip" name="Zip" type="integer"/>
+<Field label="Latitude" name="Latitude" type="number"/>
+<Field label="Longitude" name="Longitude" type="number"/>
+<Field label="Suite" name="Suite" type="string"/>
+<Field label="Telephone" name="Telephone" type="string"/>
+<Field label="Tags Available?" name="Tags_Available" type="string"/>
+<Field label="Mail-in Forms Available?" name="Mail_in_Forms_Available" type="string"/>
+<Field eofAsDelimiter="true" label="Notes" name="Notes" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata3">
+<Record fieldDelimiter="," name="Pet_License_Sales_Locations" previewAttachment="${DATAIN_DIR}/Pet_License_Sales_Locations.csv" previewAttachmentCharset="UTF-8" quoteChar="both" quotedStrings="false" recordDelimiter="\n" skipSourceRows="1" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Agency" name="Agency" type="string"/>
+<Field label="Street Address" name="Street_Address" type="string"/>
+<Field label="City" name="City_1" type="string"/>
+<Field label="Zip" name="Zip" type="integer"/>
+<Field label="Latitude" name="Latitude" type="number"/>
+<Field label="Longitude" name="Longitude" type="number"/>
+<Field label="Suite" name="Suite" type="string"/>
+<Field label="Telephone" name="Telephone" type="string"/>
+<Field label="Tags Available?" name="Tags_Available" type="string"/>
+<Field label="Mail-in Forms Available?" name="Mail_in_Forms_Available" type="string"/>
+<Field eofAsDelimiter="true" label="Notes" name="Notes" type="string"/>
+</Record>
+</Metadata>
+<Metadata id="Metadata8">
+<Record fieldDelimiter="|" name="recordName1" previewAttachmentCharset="UTF-8" recordDelimiter="\n" type="delimited">
+<Field label="City" name="City" type="string"/>
+<Field label="Agency" name="Agency" type="string"/>
+<Field label="Street Address" name="Street_Address" type="string"/>
+<Field label="City" name="City_1" type="string"/>
+<Field label="Zip" name="Zip" type="integer"/>
+<Field label="Latitude" name="Latitude" type="number"/>
+<Field label="Longitude" name="Longitude" type="number"/>
+<Field label="Suite" name="Suite" type="string"/>
+<Field label="Telephone" name="Telephone" type="string"/>
+<Field label="Tags Available?" name="Tags_Available" type="string"/>
+<Field label="Mail-in Forms Available?" name="Mail_in_Forms_Available" type="string"/>
+<Field eofAsDelimiter="true" label="Notes" name="Notes" type="string"/>
+</Record>
+</Metadata>
+<GraphParameters>
+<GraphParameterFile fileURL="workspace.prm"/>
+</GraphParameters>
+<Dictionary/>
+</Global>
+<Phase number="0">
+<Node guiName="Concatenate" guiX="642" guiY="288" id="CONCATENATE" type="CONCATENATE"/>
+<Node guiName="Filter" guiX="223" guiY="326" id="FILTER" type="EXT_FILTER">
+<attr name="filterExpression"><![CDATA[//#CTL2
+startsWith($in.0.Zip, "98");]]></attr>
+</Node>
+<Node guiName="Reformat" guiX="431" guiY="313" id="REFORMAT1" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.Name = $in.0.Name;
+	$out.0.Address = $in.0.Address;
+	$out.0.City = $in.0.City;
+	$out.0.Zip = str2integer(substring($in.0.Zip,0,5));
+	$out.0.Phone = $in.0.Phone;
+	$out.0.LocType = "Rescue Organization";
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node guiName="Reformat" guiX="406" guiY="95" id="REFORMAT2" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.Name = $in.0.Agency;
+	$out.0.Address = $in.0.Street_Address;
+	$out.0.City = $in.0.City;
+	$out.0.Zip = $in.0.Zip;
+	$out.0.Phone = $in.0.Telephone;
+	$out.0.LocType = "License";
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node guiName="SubgraphInput" guiX="50" guiY="10" id="SUBGRAPH_INPUT" type="SUBGRAPH_INPUT">
+<Port guiY="110" name="0"/>
+</Node>
+<Node dataPolicy="lenient" fileURL="${DATAIN_DIR}/Pet_License_Sales_Locations.csv" guiName="UniversalDataReader" guiX="214" guiY="71" id="UNIVERSAL_DATA_READER" quotedStrings="true" trim="true" type="DATA_READER"/>
+<Node dataPolicy="lenient" fileURL="${DATAIN_DIR}/organizations.csv" guiName="UniversalDataReader" guiX="214" guiY="185" id="UNIVERSAL_DATA_READER2" quoteCharacter="both" quotedStrings="true" trim="true" type="DATA_READER"/>
+<Edge fromNode="CONCATENATE:0" guiBendpoints="" guiRouter="Manhattan" id="Edge1" inPort="Port 0 (input)" metadata="Metadata4" outPort="Port 0 (out)" toNode="SPREADSHEET_DATA_WRITER3:0"/>
+<Edge fromNode="FILTER:0" guiBendpoints="" guiRouter="Manhattan" id="Edge10" inPort="Port 0 (in)" outPort="Port 0 (accepted)" toNode="REFORMAT1:0"/>
+<Edge fromNode="REFORMAT1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge8" inPort="Port 1 (in)" metadata="Metadata4" outPort="Port 0 (out)" toNode="CONCATENATE:1"/>
+<Edge fromNode="REFORMAT2:0" guiBendpoints="" guiRouter="Manhattan" id="Edge7" inPort="Port 0 (in)" metadata="Metadata4" outPort="Port 0 (out)" toNode="CONCATENATE:0"/>
+<Edge fromNode="UNIVERSAL_DATA_READER:0" guiBendpoints="" guiRouter="Manhattan" id="Edge2" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (output)" toNode="REFORMAT2:0"/>
+<Edge fromNode="UNIVERSAL_DATA_READER2:0" guiBendpoints="" guiRouter="Manhattan" id="Edge4" inPort="Port 0 (in)" metadata="Metadata6" outPort="Port 0 (output)" toNode="FILTER:0"/>
+</Phase>
+<Phase number="3">
+<Node existingSheetsActions="CLEAR_SHEETS" fileURL="${DATAOUT_DIR}/locations.xlsx" guiName="SpreadsheetDataWriter" guiX="608" guiY="140" id="SPREADSHEET_DATA_WRITER3" sheet="Sheet0" type="SPREADSHEET_WRITER" writeMode="OVERWRITE_SHEET_IN_MEMORY"/>
+<Node guiName="SubgraphOutput" guiX="870" guiY="10" id="SUBGRAPH_OUTPUT" type="SUBGRAPH_OUTPUT">
+<Port guiY="110" name="0"/>
+</Node>
+</Phase>
+</Graph>
