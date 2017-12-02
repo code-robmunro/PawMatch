@@ -814,6 +814,149 @@ ALTER TABLE DetailedPreferences
 DROP LikesSwimming, 
 CHANGE COLUMN `temp` `LikesSwimming` BOOLEAN;
 
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(LikesLaps = 'Yes',
+        TRUE,
+        IF(LikesLaps='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP LikesLaps, 
+CHANGE COLUMN `temp` `LikesLaps` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Apartment = 'Yes',
+        TRUE,
+        IF(Apartment='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Apartment, 
+CHANGE COLUMN `temp` `Apartment` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Protective = 'Yes',
+        TRUE,
+        IF(Protective='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Protective, 
+CHANGE COLUMN `temp` `Protective` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Obedient = 'Yes',
+        TRUE,
+        IF(Obedient='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Obedient, 
+CHANGE COLUMN `temp` `Obedient` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Playful = 'Yes',
+        TRUE,
+        IF(Playful ='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Playful, 
+CHANGE COLUMN `temp` `Playful` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(TimidShy = 'Yes',
+        TRUE,
+        IF(TimidShy ='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP TimidShy, 
+CHANGE COLUMN `temp` `TimidShy` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Independent = 'Yes',
+        TRUE,
+        IF(Independent ='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Independent, 
+CHANGE COLUMN `temp` `Independent` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Affectionate = 'Yes',
+        TRUE,
+        IF(Affectionate ='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Affectionate, 
+CHANGE COLUMN `temp` `Affectionate` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(EagerToPlease = 'Yes',
+        TRUE,
+        IF(EagerToPlease ='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP EagerToPlease, 
+CHANGE COLUMN `temp` `EagerToPlease` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(EvenTempered = 'Yes',
+        TRUE,
+        IF(EvenTempered ='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP EvenTempered, 
+CHANGE COLUMN `temp` `EvenTempered` BOOLEAN;
+
+ALTER TABLE DetailedPreferences
+ADD temp BOOLEAN;
+UPDATE DetailedPreferences
+SET 
+    temp = IF(Gentle = 'Yes',
+        TRUE,
+        IF(Gentle='No',
+            FALSE,
+            NULL));
+ALTER TABLE DetailedPreferences
+DROP Gentle, 
+CHANGE COLUMN `temp` `Gentle` BOOLEAN;
+
 #------------------------------------------
 
 ALTER TABLE Animals

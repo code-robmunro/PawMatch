@@ -24,8 +24,6 @@ public class Injector {
 
   public static void main(String[] args) throws SQLException {
 
-    // TODO: Currently only works if no fields are null
-
     /* Daos */
     CommonApplicationsDao commonAppDao = CommonApplicationsDao.getInstance();
     PetProfilesDao petProfilesDao = PetProfilesDao.getInstance();
@@ -68,14 +66,17 @@ public class Injector {
 //    for(PetProfiles p : profilesList)
 //      System.out.println(p.getPetProfileId());
 
+    SimplePreferences user1SimplePrefs = simplePrefsDao.getSimplePrefsByUserId(1);
+    System.out.println(user1SimplePrefs.toString());
+
     /*
     Make sure you've inserted the preference for user2:
 
     INSERT INTO SimplePreferences(Species, Sex, Breed, Age, Size, HouseTrained, CoatLength,
 	HasMedia, Location, ShelteredLonger, UserId)
-    VALUES('Dog', 'Female', 'Labrador', 'Young', null, 'Yes', 'Short', 'Yes', 94582 , null, 2);
+    VALUES('Dog', 'Female', 'Labrador', 'Young', null, 'Yes', 'Short', 'Yes', 94582 , null, 1);
      */
-    List<PetProfiles> petsForUser2 = petProfilesDao.matchPetsToSimplePrefs(usersDao.getUserById(2));
+    List<PetProfiles> petsForUser2 = petProfilesDao.matchPetsToSimplePrefs(usersDao.getUserById(1));
 //    for(PetProfiles p : petsForUser2)
 //      System.out.println(p.getPetProfileId());
 

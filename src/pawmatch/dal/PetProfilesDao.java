@@ -15,7 +15,7 @@ import pawmatch.model.Users;
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class PetProfilesDao {
+public class PetProfilesDao extends AbstractDao {
 
   private ConnectionManager connectionManager;
   private static PetProfilesDao instance = null;
@@ -120,13 +120,13 @@ public class PetProfilesDao {
 
       while (results.next()) {
         int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
-        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
+        Enums.Species species = Enums.Species.valueOf(parseValue(results, "Species"));
+        Enums.Sex sex = Enums.Sex.valueOf(parseValue(results,"Sex"));
         String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(results.getString("Age").toUpperCase());
-        Enums.Size size = Enums.Size.valueOf(results.getString("Size").toUpperCase());
+        Enums.Age age = Enums.Age.valueOf(parseValue(results,"Age"));
+        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
         boolean housetrained = results.getBoolean("HouseTrained");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(results.getString("CoatLength").toUpperCase());
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
         int location = results.getInt("Location");
         boolean shelteredLonger = results.getBoolean("ShelteredLonger");
         int picturesId = results.getInt("PicturesId");
@@ -189,17 +189,13 @@ What animals match a given user's simple preferences?
 
       while (results.next()) {
         int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
-        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
+        Enums.Species species = Enums.Species.valueOf(parseValue(results, "Species"));
+        Enums.Sex sex = Enums.Sex.valueOf(parseValue(results, "Sex"));
         String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(results.getString("Age").toUpperCase());
-        Enums.Size size = Enums.Size.valueOf(results.getString("Size").toUpperCase());
+        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
+        Enums.Size size = Enums.Size.valueOf(parseValue(results,"Size"));
         boolean housetrained = results.getBoolean("HouseTrained");
-
-        /* This is weird but the fastest way I could make it work */
-        String l = results.getString("CoatLength").length() < 1 ? "EMPTY" : results.getString("CoatLength");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(l.toUpperCase());
-
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
         int location = results.getInt("Location");
         boolean shelteredLonger = results.getBoolean("ShelteredLonger");
         int picturesId = results.getInt("PicturesId");
