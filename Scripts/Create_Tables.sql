@@ -170,7 +170,7 @@ CREATE TABLE Users (
 );
 
 
-LOAD DATA LOCAL INFILE ‘/Path/to/users.csv' INTO TABLE Users
+LOAD DATA LOCAL INFILE '~/PawMatch/users.csv' INTO TABLE Users
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r\n' (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster);
 
@@ -290,6 +290,42 @@ CREATE TABLE PetProfiles (
   ShelteredLonger BOOLEAN,
   PicturesId INTEGER,
   VideosId INTEGER,
+  OKWithDogs BOOLEAN,
+  OKWithCats BOOLEAN,
+  OKWithKids BOOLEAN,
+  OKWithAdults BOOLEAN,
+  OKWithFarm BOOLEAN,
+  GoodWithSeniors BOOLEAN,
+  Declawed BOOLEAN,
+  Color VARCHAR(255),
+  UpToDate BOOLEAN,
+  Pictures TEXT,
+  Videos TEXT,
+  ObedienceTraining ENUM('Has Basic Training','Needs Training','Well Trained', ''),
+  Fee INTEGER,
+  ExerciseNeeds ENUM('Low', 'Moderate', 'High', ''),
+  EnergyLevel ENUM('Low', 'Moderate', 'High', ''),
+  ActivityLevel ENUM('Not Active', 'Slightly Active', 'Moderately Active', 'Highly Active', ''),
+  GroomingNeeds ENUM('Low', 'Moderate', 'High', ''),
+  Shedding ENUM('None', 'Low', 'Moderate', 'High', ''),
+  Goofy BOOLEAN,
+  Hypoallergenic BOOLEAN,
+  CarTrained BOOLEAN,
+  LeashTrained BOOLEAN,
+  LikesToFetch BOOLEAN,
+  LikesToys BOOLEAN,
+  LikesSwimming BOOLEAN,
+  LikesLaps BOOLEAN,
+  Apartment BOOLEAN,
+  Protective BOOLEAN,
+  Obedient BOOLEAN,
+  Playful BOOLEAN,
+  TimidShy BOOLEAN,
+  Independent BOOLEAN,
+  Affectionate BOOLEAN,
+  EagerToPlease BOOLEAN,
+  EvenTempered BOOLEAN,
+  Gentle BOOLEAN,
   ShelterProfileId INTEGER,
   CONSTRAINT pk_PetProfiles_ID PRIMARY KEY (PetProfileId),
   CONSTRAINT fk_PetProfiles_ShelterProfileId
