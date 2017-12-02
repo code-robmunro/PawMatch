@@ -159,7 +159,7 @@
 <Dictionary/>
 </Global>
 <Phase number="0">
-<Node guiName="Concatenate" guiX="236" guiY="77" id="CONCATENATE" type="CONCATENATE"/>
+<Node guiName="Concatenate" guiX="272" guiY="77" id="CONCATENATE" type="CONCATENATE"/>
 <Node dbConnection="JDBC1" guiName="DBInputTable" guiX="62" guiY="64" id="DBINPUT_TABLE" type="DB_INPUT_TABLE">
 <attr name="sqlQuery"><![CDATA[SELECT Name,Species,PrimaryBreed,SecondaryBreed  FROM Animals]]></attr>
 </Node>
@@ -231,13 +231,13 @@ function integer transform() {
 ]]></attr>
 </Node>
 <Node dataPolicy="lenient" fileURL="${DATAIN_DIR}/Seattle_Pet_Licenses.csv" guiName="UniversalDataReader" guiX="74" guiY="303" id="UNIVERSAL_DATA_READER1" numRecords="100" quotedStrings="true" type="DATA_READER"/>
-<Edge fromNode="CONCATENATE:0" guiBendpoints="" guiRouter="Manhattan" id="Edge7" inPort="Port 0 (input)" metadata="Metadata11" outPort="Port 0 (out)" toNode="SPREADSHEET_DATA_WRITER1:0"/>
+<Edge fromNode="CONCATENATE:0" guiBendpoints="" guiRouter="Manhattan" id="Edge12" inPort="Port 0 (input)" outPort="Port 0 (out)" toNode="SPREADSHEET_DATA_WRITER:0"/>
 <Edge fromNode="DBINPUT_TABLE:0" guiBendpoints="" guiRouter="Manhattan" id="Edge3" inPort="Port 0 (in)" metadata="Metadata12" outPort="Port 0 (out)" toNode="REFORMAT1:0"/>
-<Edge fromNode="REFORMAT:0" guiBendpoints="" guiRouter="Manhattan" id="Edge9" inPort="Port 1 (in)" metadata="Metadata11" outPort="Port 0 (out)" toNode="CONCATENATE:1"/>
-<Edge fromNode="REFORMAT1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge10" inPort="Port 0 (in)" metadata="Metadata11" outPort="Port 0 (out)" toNode="CONCATENATE:0"/>
+<Edge fromNode="REFORMAT:0" guiBendpoints="" guiRouter="Manhattan" id="Edge9" inPort="Port 0 (in)" metadata="Metadata11" outPort="Port 0 (out)" toNode="CONCATENATE:0"/>
+<Edge fromNode="REFORMAT1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge10" inPort="Port 1 (in)" metadata="Metadata11" outPort="Port 0 (out)" toNode="CONCATENATE:1"/>
 <Edge fromNode="UNIVERSAL_DATA_READER1:0" guiBendpoints="" guiRouter="Manhattan" id="Edge8" inPort="Port 0 (in)" metadata="Metadata5" outPort="Port 0 (output)" toNode="REFORMAT:0"/>
 </Phase>
-<Phase number="1">
-<Node existingSheetsActions="REMOVE_SHEETS" fileURL="${DATAOUT_DIR}/animals.xlsx" guiName="SpreadsheetDataWriter" guiX="422" guiY="65" id="SPREADSHEET_DATA_WRITER1" sheet="Sheet0" type="SPREADSHEET_WRITER" writeMode="OVERWRITE_SHEET_IN_MEMORY"/>
+<Phase number="3">
+<Node existingSheetsActions="CLEAR_SHEETS" fileURL="${DATAOUT_DIR}/animals.xlsx" guiName="SpreadsheetDataWriter" guiX="421" guiY="77" id="SPREADSHEET_DATA_WRITER" sheet="Sheet0" type="SPREADSHEET_WRITER" writeMode="OVERWRITE_SHEET_IN_MEMORY"/>
 </Phase>
 </Graph>
