@@ -185,7 +185,7 @@ public class DetailedPreferencesDao extends AbstractDao {
         Boolean videos = results.getBoolean("Videos");
         Boolean obedience = results.getBoolean("ObedienceTraining");
         Integer fee = results.getInt("Fee");
-        Boolean exercise = results.getBoolean("Exercise");
+        Boolean exercise = results.getBoolean("ExerciseNeeds");
         Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(parseValue(results, "EnergyLevel"));
         Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
         Boolean grooming = results.getBoolean("GroomingNeeds");
