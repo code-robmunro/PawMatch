@@ -14,8 +14,8 @@ Species, Sex, Breed, Age, Size, HouseTrained, CoatLength, Location, Color, OKWit
         WHERE Age IN ('Adult', 'Baby', 'Senior', 'Young', '')
 			AND CoatLength IN ('Short', 'Medium', 'Long', '')
             AND Sex IN ('Male', 'Female', '')
-            AND EnergyLevel IN('High', 'Low', 'Moderate', '')
-            AND ActivityLevel IN('Not Active', 'Slightly Active', 'Moderately Active', 'Highly Active', '')
+            AND (EnergyLevel IN('High', 'Low', 'Moderate', '') OR EnergyLevel IS NULL)
+            AND (ActivityLevel IN('Not Active', 'Slightly Active', 'Moderately Active', 'Highly Active', '') OR ActivityLevel IS NULL)
         );
         
 INSERT INTO Users (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster)
