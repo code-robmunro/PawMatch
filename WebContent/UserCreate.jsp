@@ -42,10 +42,6 @@
 			<input id="foster" name="foster" value="">
 		</p>
 		<p>
-			<label for="userid">User ID</label>
-			<input id="userid" name="userid" value="">
-		</p>
-		<p>
 			<input type="submit">
 		</p>
 	</form>
