@@ -52,7 +52,7 @@
                     <td><c:out value="${user.getNotificationsOn()}" /></td>
                     <td><c:out value="${user.getFoster()}" /></td>
                   	<td><a href="userdelete?userid=<c:out value="${user.getUserId()}"/>">Delete</a></td>
-                    <%--<td><a href="userupdate?userid=<c:out value="${commonApp.getUserId()}"/>">Update</a></td>--%>
+					<td><a href="simplesearch?userid=<c:out value="${user.getUserId()}"/>">Simple Search</a></td>
                 </tr>
        </table>
 </body>
