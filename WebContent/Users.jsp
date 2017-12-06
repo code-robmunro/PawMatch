@@ -26,6 +26,7 @@
 <br/>
 <div id="usercreate"><a href="usercreate">Create User</a></div>
 <div id="commonapps"><a href="commonapps">Go To Common Apps</a></div>
+<div id="locationsearch"><a href="locationsearch">Search Pets By Location</a></div>
 <br/>
 <h1>Matching User</h1>
 <table border="1">
