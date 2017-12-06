@@ -39,17 +39,20 @@ public class Injector {
     ShelterProfiles shelter1 = new ShelterProfiles("A", "1 Main St", "Seattle", "WA", "1234556",
         "123@asfd", "www.asdf.com", "facebook.asdf", true, true, 1);
     shelter1 = shelterProfilesDao.create(shelter1);
-
+/*
     PetProfiles petProfile1 = new PetProfiles(Enums.Species.DOG, Enums.Sex.FEMALE, "Labrador",
         Enums.Age.YOUNG, Enums.Size.SMALL, true, Enums.CoatLength.LONG, 98122,
         true, 1, 1, shelter1.getShelterProfileId());
     petProfile1 = petProfilesDao.create(petProfile1);
-
-    DetailedPreferences detailedPrefs1 = new DetailedPreferences( true, true, true, true, true,
-        true, true, "brown", true, true, false, true, 25, true,
-        Enums.EnergyLevel.HIGH, Enums.ActivityLevel.HIGHLY_ACTIVE, false, true, false,
-        true, false, true, false, true, false, true, false, true, false, true, false, true, false,
-        true, false, true, 1);
+*/
+    DetailedPreferences detailedPrefs1 = new DetailedPreferences( true, true,
+        true, true, true,true, true,
+        "brown", true, true, false, Enums.ObedienceTraining.HAS_BASIC_TRAINING,
+        25, Enums.ExerciseNeeds.LOW, Enums.EnergyLevel.HIGH, Enums.ActivityLevel.EMPTY,
+        Enums.GroomingNeeds.LOW, Enums.Shedding.LOW, false, true, false,
+        true, false, true, false, true,
+        false, true, false, true, false, true,
+        false, true, false, true, 1);
     //detailedPrefs1 = detailedPrefsDao.create(detailedPrefs1);
 
     SimplePreferences simplePrefs1 = new SimplePreferences(Enums.Species.DOG, Enums.Sex.FEMALE, "Labrador",
@@ -87,7 +90,7 @@ public class Injector {
 
     /* Delete */
     commonAppDao.delete(app1);
-    petProfilesDao.delete(petProfile1);
+  //  petProfilesDao.delete(petProfile1);
     shelterProfilesDao.delete(shelter1);
     usersDao.delete(user1);
     simplePrefsDao.delete(simplePrefs1);

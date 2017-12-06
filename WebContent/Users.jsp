@@ -25,6 +25,7 @@
 	</form>
 	<br/>
 	<div id="usercreate"><a href="usercreate">Create User</a></div>
+	<div id="commonapps"><a href="commonapps">Go To Common Applications</a></div>
 	<br/>
 	<h1>Matching User</h1>
         <table border="1">

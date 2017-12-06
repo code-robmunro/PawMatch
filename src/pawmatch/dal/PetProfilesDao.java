@@ -250,15 +250,10 @@ public class PetProfilesDao extends AbstractDao {
         Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
         Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
         String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(results.getString("Age").toUpperCase());
-        Enums.Size size = Enums.Size.valueOf(results.getString("Size").toUpperCase());
+        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
+        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
         boolean housetrained = results.getBoolean("HouseTrained");
-
-        /* This is weird but the fastest way I could make it work */
-        String l = results.getString("CoatLength").length() < 1 ? "EMPTY"
-            : results.getString("CoatLength");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(l.toUpperCase());
-
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
         int location = results.getInt("Location");
         boolean shelteredLonger = results.getBoolean("ShelteredLonger");
         int picturesId = results.getInt("PicturesId");
@@ -273,25 +268,14 @@ public class PetProfilesDao extends AbstractDao {
         boolean declawed = results.getBoolean("Declawed");
         String color = results.getString("Color");
         boolean upToDate = results.getBoolean("UpToDate");
-        l = results.getString("ObedienceTraining").length() < 1 ? "EMPTY"
-            : results.getString("ObedienceTraining");
         Enums.ObedienceTraining obedienceTraining =
-            Enums.ObedienceTraining.valueOf(l.toUpperCase());
+            Enums.ObedienceTraining.valueOf(parseValue(results, "ObedienceTraining"));
         int fee = results.getInt("Fee");
-        l = results.getString("ExerciseNeeds").length() < 1 ? "EMPTY"
-            : results.getString("ExerciseNeeds");
-        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(l.toUpperCase());
-        l = results.getString("EnergyLevel").length() < 1 ? "EMPTY"
-            : results.getString("EnergyLevel");
-        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(l.toUpperCase());
-        l = results.getString("ActivityLevel").length() < 1 ? "EMPTY"
-            : results.getString("ActivityLevel");
-        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(l.toUpperCase());
-        l = results.getString("GroomingNeeds").length() < 1 ? "EMPTY"
-            : results.getString("GroomingNeeds");
-        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(l.toUpperCase());
-        l = results.getString("Shedding").length() < 1 ? "EMPTY" : results.getString("Shedding");
-        Enums.Shedding shedding = Enums.Shedding.valueOf(l.toUpperCase());
+        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(parseValue(results, "ExerciseNeeds"));
+        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(parseValue(results, "EnergyLevel"));
+        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
+        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(parseValue(results, "GroomingNeeds"));
+        Enums.Shedding shedding = Enums.Shedding.valueOf(parseValue(results, "Shedding"));
 
         boolean goofy = results.getBoolean("Goofy");
         boolean hypoallergenic = results.getBoolean("Hypoallergenic");
@@ -339,4 +323,8 @@ public class PetProfilesDao extends AbstractDao {
     return profiles;
   }
 
+  public List<PetProfiles> matchPetsToDetailedPrefs(Users userById) {
+    // TODO: fill in method
+    return new ArrayList<>();
+  }
 }
