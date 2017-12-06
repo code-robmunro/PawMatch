@@ -11,7 +11,7 @@ import pawmatch.model.ShelterProfiles;
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class ShelterProfilesDao extends AbstractDao {
+public class ShelterProfilesDao {
 
   private ConnectionManager connectionManager;
   private static ShelterProfilesDao instance = null;

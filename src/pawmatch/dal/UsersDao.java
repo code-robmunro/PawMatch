@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pawmatch.mappers.UsersMapper;
 import pawmatch.model.Users;
 
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class UsersDao extends AbstractDao {
+public class UsersDao {
 
   private ConnectionManager connectionManager;
   private static UsersDao instance = null;
@@ -114,18 +115,7 @@ public class UsersDao extends AbstractDao {
       selectStmt.setInt(1, userId);
       results = selectStmt.executeQuery();
       if(results.next()) {
-        int id = results.getInt("UserId");
-        String userName  = results.getString("UserName");
-        String firstName  = results.getString("FirstName");
-        String lastName  = results.getString("LastName");
-        String email  = results.getString("Email");
-        String password  = results.getString("Password");
-        int simpleId  = results.getInt("SimplePreferencesId");
-        int detailedId  = results.getInt("DetailedPreferencesId");
-        boolean notifications = results.getBoolean("NotificationsOn");
-        boolean foster = results.getBoolean("Foster");
-        Users user = new Users(userId, userName, firstName, lastName, email, password, simpleId,
-            detailedId, notifications, foster);
+        Users user = new UsersMapper().mapRow(results);
         return user;
       }
     } catch (SQLException e) {

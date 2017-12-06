@@ -3,14 +3,13 @@ package pawmatch.mappers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import pawmatch.dal.AbstractDao;
 import pawmatch.model.Enums;
 import pawmatch.model.PetProfiles;
 
 /**
  * Created by irenakushner on 12/5/17.
  */
-public class PetProfilesMapper extends AbstractDao {
+public class PetProfilesMapper extends AbstractMapper {
 
   public PetProfiles mapRow(ResultSet results) throws SQLException {
 

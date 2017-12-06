@@ -8,12 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pawmatch.mappers.CommonAppsMapper;
 import pawmatch.model.CommonApplications;
 
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class CommonApplicationsDao extends AbstractDao {
+public class CommonApplicationsDao {
 
   private ConnectionManager connectionManager;
   private static CommonApplicationsDao instance = null;
@@ -128,10 +129,7 @@ public class CommonApplicationsDao extends AbstractDao {
       selectStmt.setInt(1, userId);
       results = selectStmt.executeQuery();
       if(results.next()) {
-    	Integer commonAppId = results.getInt("CommonApplicationId");
-    	String appBody = results.getString("ApplicationBody");
-        Integer resultUserId = results.getInt("UserId");
-        CommonApplications commonApp = new CommonApplications(commonAppId, appBody, resultUserId);
+        CommonApplications commonApp = new CommonAppsMapper().mapRow(results);
         return commonApp;     
       }
     } catch (SQLException e) {

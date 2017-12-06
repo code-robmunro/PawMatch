@@ -1,4 +1,4 @@
-package pawmatch.dal;
+package pawmatch.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 /**
  * Created by irenakushner on 12/1/17.
  */
-public class AbstractDao {
+public class AbstractMapper {
 
   /*
   Parses a column value into a String that can be interpreted as an Enum.

@@ -12,7 +12,7 @@ import pawmatch.model.Users;
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class PetProfilesDao extends AbstractDao {
+public class PetProfilesDao {
 
   private ConnectionManager connectionManager;
   private static PetProfilesDao instance = null;
