@@ -16,7 +16,7 @@ CREATE TABLE Animals (
   OrgID INTEGER,
   AnimalID INTEGER,
   Status TEXT,
-  LastUpdated DATE,
+  LastUpdated TEXT,
   RescueID TEXT,
   Name TEXT,
   Summary TEXT,
@@ -32,12 +32,12 @@ CREATE TABLE Animals (
   Declawed TEXT,
   Housetrained TEXT,
   Age TEXT,
-  Birthdate DATE,
+  Birthdate VARCHAR(255),
   SpecialNeeds TEXT,
   Altered TEXT,
   Size VARCHAR(255),
-  SizeCurrent DECIMAL(8,2),
-  SizePotential DECIMAL(8,2),
+  SizeCurrent TEXT,
+  SizePotential TEXT,
   SizeUOM TEXT,
   Uptodate TEXT,
   Color TEXT,
@@ -45,10 +45,10 @@ CREATE TABLE Animals (
   Pattern TEXT,
   Courtesy TEXT,
   Found TEXT,
-  FoundDate DATE,
-  FoundZipcode BIGINT,
-  AnimalLocation BIGINT,
-  KillDate DATE,
+  FoundDate TEXT,
+  FoundZipcode TEXT,
+  AnimalLocation TEXT,
+  KillDate TEXT,
   KillReason TEXT,
   DescriptionPlain TEXT,
   TrackerImageUrl VARCHAR(255),
@@ -106,7 +106,7 @@ CREATE TABLE Animals (
   Eventempered TEXT,
   Gentle TEXT,
   Goofy TEXT,
-  Pictures TEXT,
+  Pictures MEDIUMTEXT,
   Videos TEXT,
   VideoUrls TEXT,
   MediaLastUpdated VARCHAR(255),
@@ -120,7 +120,7 @@ CREATE TABLE Animals (
   CONSTRAINT pk_Animals_ID PRIMARY KEY (animalID)
 );
 
-LOAD DATA LOCAL INFILE '~/PawMatch/pet_output copy.csv' INTO TABLE Animals
+LOAD DATA LOCAL INFILE 'C:/Users/Robert/PycharmProjects/jsonextractor/pet_output.csv' INTO TABLE Animals
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES;
@@ -150,10 +150,11 @@ CREATE TABLE Organizations (
   CONSTRAINT pk_Organizations_ID PRIMARY KEY (OrganizationId)
 );
 
-LOAD DATA LOCAL INFILE '~/PawMatch/org_output.csv' INTO TABLE Organizations
+LOAD DATA LOCAL INFILE 'D:/Users/Robert/Documents/GitHub/CS5200_DBMS_Cat_Superheroes/Cleaned Data/organizations.csv' INTO TABLE Organizations
 FIELDS TERMINATED BY '\t'
-LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES;
+
+DELETE FROM `pawmatch`.`organizations` WHERE `OrganizationId`='0';
 
 CREATE TABLE Users (
   UserId INTEGER AUTO_INCREMENT,
@@ -170,7 +171,7 @@ CREATE TABLE Users (
 );
 
 
-LOAD DATA LOCAL INFILE '~/PawMatch/users.csv' INTO TABLE Users
+LOAD DATA LOCAL INFILE 'C:/Users/Robert/PycharmProjects/jsonextractor/users.csv' INTO TABLE Users
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r\n' (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster);
 
