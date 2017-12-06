@@ -93,4 +93,53 @@ public class Enums {
     }
   }
 
+  public enum ObedienceTraining{
+    HAS_BASIC_TRAINING("Has Basic Training"), NEEDS_TRAINING("Needs Training"),
+    WELL_TRAINED("Well Trained"), EMPTY("");
+
+    private final String code;
+    ObedienceTraining(String code){this.code = code;}
+
+    @Override
+    public String toString(){
+      return this.code;
+    }
+  }
+
+  public enum ExerciseNeeds{
+    LOW("Low"), MODERATE("Moderate"), HIGH("High"), EMPTY("");
+
+    private final String code;
+    ExerciseNeeds(String code){this.code = code;}
+
+    @Override
+    public String toString(){
+      return this.code;
+    }
+  }
+
+  public enum GroomingNeeds{
+    LOW("Low"), MODERATE("Moderate"), HIGH("High"), EMPTY("");
+
+    private final String code;
+    GroomingNeeds(String code){this.code = code;}
+
+    @Override
+    public String toString(){
+      return this.code;
+    }
+  }
+
+  public enum Shedding{
+    LOW("Low"), MODERATE("Moderate"), HIGH("High"), NONE("None"), EMPTY("");
+
+    private final String code;
+    Shedding(String code){this.code = code;}
+
+    @Override
+    public String toString(){
+      return this.code;
+    }
+  }
+
 }
