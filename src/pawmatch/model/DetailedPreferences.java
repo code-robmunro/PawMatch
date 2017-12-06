@@ -1,4 +1,5 @@
 package pawmatch.model;
+
 import pawmatch.model.Enums.*;
 
 /**
@@ -18,13 +19,13 @@ public class DetailedPreferences {
   private Boolean upToDate;
   private Boolean pictures;
   private Boolean videos;
-  private Boolean obedienceTraining;
+  private ObedienceTraining obedienceTraining;
   private Integer fee;
-  private Boolean ExerciseNeeds;
+  private ExerciseNeeds exerciseNeeds;
   private EnergyLevel energyLevel;
   private ActivityLevel activityLevel;
-  private Boolean groomingNeeds;
-  private Boolean shedding;
+  private GroomingNeeds groomingNeeds;
+  private Shedding shedding;
   private Boolean goofy;
   private Boolean hypoallergenic;
   private Boolean carTrained;
@@ -47,18 +48,15 @@ public class DetailedPreferences {
 
   // Constructor with detailedPreferencesId
   public DetailedPreferences(Integer detailedPreferencesId, Boolean oKWithDogs, Boolean oKWithCats,
-                             Boolean oKWithKids, Boolean oKWithAdults, Boolean oKWithFarm,
-                             Boolean goodWithSeniors, Boolean declawed, String color, Boolean
-                                 upToDate, Boolean pictures, Boolean videos, Boolean
-                                 obedienceTraining, Integer fee, Boolean exerciseNeeds, EnergyLevel
-                                 energyLevel, ActivityLevel activityLevel, Boolean groomingNeeds,
-                             Boolean shedding, Boolean goofy, Boolean hypoallergenic, Boolean
-                                 carTrained, Boolean leashTrained, Boolean likesToFetch, Boolean
-                                 likesToys, Boolean likesSwimming, Boolean likesLaps, Boolean
-                                 apartment, Boolean protective, Boolean obedient, Boolean
-                                 playful, Boolean timidShy, Boolean independent, Boolean
-                                 affectionate, Boolean eagerToPlease, Boolean evenTempered,
-                             Boolean gentle, Integer userId) {
+      Boolean oKWithKids, Boolean oKWithAdults, Boolean oKWithFarm, Boolean goodWithSeniors,
+      Boolean declawed, String color, Boolean upToDate, Boolean pictures, Boolean videos,
+      ObedienceTraining obedienceTraining, Integer fee, ExerciseNeeds exerciseNeeds,
+      EnergyLevel energyLevel, ActivityLevel activityLevel, GroomingNeeds groomingNeeds,
+      Shedding shedding, Boolean goofy, Boolean hypoallergenic, Boolean carTrained,
+      Boolean leashTrained, Boolean likesToFetch, Boolean likesToys, Boolean likesSwimming,
+      Boolean likesLaps, Boolean apartment, Boolean protective, Boolean obedient, Boolean playful,
+      Boolean timidShy, Boolean independent, Boolean affectionate, Boolean eagerToPlease,
+      Boolean evenTempered, Boolean gentle, Integer userId) {
     this.detailedPreferencesId = detailedPreferencesId;
     this.oKWithDogs = oKWithDogs;
     this.oKWithCats = oKWithCats;
@@ -73,7 +71,7 @@ public class DetailedPreferences {
     this.videos = videos;
     this.obedienceTraining = obedienceTraining;
     this.fee = fee;
-    ExerciseNeeds = exerciseNeeds;
+    this.exerciseNeeds = exerciseNeeds;
     this.energyLevel = energyLevel;
     this.activityLevel = activityLevel;
     this.groomingNeeds = groomingNeeds;
@@ -100,18 +98,16 @@ public class DetailedPreferences {
   }
 
   // Constructor without detailedPreferencesId
-  public DetailedPreferences(Boolean oKWithDogs, Boolean oKWithCats, Boolean oKWithKids, Boolean
-      oKWithAdults, Boolean oKWithFarm, Boolean goodWithSeniors, Boolean declawed, String color,
-                             Boolean upToDate, Boolean pictures, Boolean videos, Boolean
-                                 obedienceTraining, Integer fee, Boolean exerciseNeeds, EnergyLevel
-                                 energyLevel, ActivityLevel activityLevel, Boolean groomingNeeds,
-                             Boolean shedding, Boolean goofy, Boolean hypoallergenic, Boolean
-                                 carTrained, Boolean leashTrained, Boolean likesToFetch, Boolean
-                                 likesToys, Boolean likesSwimming, Boolean likesLaps, Boolean
-                                 apartment, Boolean protective, Boolean obedient, Boolean
-                                 playful, Boolean timidShy, Boolean independent, Boolean
-                                 affectionate, Boolean eagerToPlease, Boolean evenTempered,
-                             Boolean gentle, Integer userId) {
+  public DetailedPreferences(Boolean oKWithDogs, Boolean oKWithCats, Boolean oKWithKids,
+      Boolean oKWithAdults, Boolean oKWithFarm, Boolean goodWithSeniors, Boolean declawed,
+      String color, Boolean upToDate, Boolean pictures, Boolean videos,
+      ObedienceTraining obedienceTraining, Integer fee, ExerciseNeeds exerciseNeeds,
+      EnergyLevel energyLevel, ActivityLevel activityLevel, GroomingNeeds groomingNeeds,
+      Shedding shedding, Boolean goofy, Boolean hypoallergenic, Boolean carTrained,
+      Boolean leashTrained, Boolean likesToFetch, Boolean likesToys, Boolean likesSwimming,
+      Boolean likesLaps, Boolean apartment, Boolean protective, Boolean obedient, Boolean playful,
+      Boolean timidShy, Boolean independent, Boolean affectionate, Boolean eagerToPlease,
+      Boolean evenTempered, Boolean gentle, Integer userId) {
     this.oKWithDogs = oKWithDogs;
     this.oKWithCats = oKWithCats;
     this.oKWithKids = oKWithKids;
@@ -125,7 +121,7 @@ public class DetailedPreferences {
     this.videos = videos;
     this.obedienceTraining = obedienceTraining;
     this.fee = fee;
-    ExerciseNeeds = exerciseNeeds;
+    this.exerciseNeeds = exerciseNeeds;
     this.energyLevel = energyLevel;
     this.activityLevel = activityLevel;
     this.groomingNeeds = groomingNeeds;
@@ -152,7 +148,7 @@ public class DetailedPreferences {
   }
 
   public Integer getDetailedPreferencesId() {
-    return detailedPreferencesId;
+    return this.detailedPreferencesId;
   }
 
   public void setDetailedPreferencesId(Integer detailedPreferencesId) {
@@ -160,7 +156,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getoKWithDogs() {
-    return oKWithDogs;
+    return this.oKWithDogs;
   }
 
   public void setoKWithDogs(Boolean oKWithDogs) {
@@ -168,7 +164,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getoKWithCats() {
-    return oKWithCats;
+    return this.oKWithCats;
   }
 
   public void setoKWithCats(Boolean oKWithCats) {
@@ -176,7 +172,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getoKWithKids() {
-    return oKWithKids;
+    return this.oKWithKids;
   }
 
   public void setoKWithKids(Boolean oKWithKids) {
@@ -184,7 +180,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getoKWithAdults() {
-    return oKWithAdults;
+    return this.oKWithAdults;
   }
 
   public void setoKWithAdults(Boolean oKWithAdults) {
@@ -192,7 +188,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getoKWithFarm() {
-    return oKWithFarm;
+    return this.oKWithFarm;
   }
 
   public void setoKWithFarm(Boolean oKWithFarm) {
@@ -200,7 +196,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getGoodWithSeniors() {
-    return goodWithSeniors;
+    return this.goodWithSeniors;
   }
 
   public void setGoodWithSeniors(Boolean goodWithSeniors) {
@@ -208,7 +204,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getDeclawed() {
-    return declawed;
+    return this.declawed;
   }
 
   public void setDeclawed(Boolean declawed) {
@@ -216,7 +212,7 @@ public class DetailedPreferences {
   }
 
   public String getColor() {
-    return color;
+    return this.color;
   }
 
   public void setColor(String color) {
@@ -224,7 +220,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getUpToDate() {
-    return upToDate;
+    return this.upToDate;
   }
 
   public void setUpToDate(Boolean upToDate) {
@@ -232,7 +228,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getPictures() {
-    return pictures;
+    return this.pictures;
   }
 
   public void setPictures(Boolean pictures) {
@@ -240,39 +236,39 @@ public class DetailedPreferences {
   }
 
   public Boolean getVideos() {
-    return videos;
+    return this.videos;
   }
 
   public void setVideos(Boolean videos) {
     this.videos = videos;
   }
 
-  public Boolean getObedienceTraining() {
-    return obedienceTraining;
+  public ObedienceTraining getObedienceTraining() {
+    return this.obedienceTraining;
   }
 
-  public void setObedienceTraining(Boolean obedienceTraining) {
+  public void setObedienceTraining(ObedienceTraining obedienceTraining) {
     this.obedienceTraining = obedienceTraining;
   }
 
   public Integer getFee() {
-    return fee;
+    return this.fee;
   }
 
   public void setFee(Integer fee) {
     this.fee = fee;
   }
 
-  public Boolean getExerciseNeeds() {
-    return ExerciseNeeds;
+  public ExerciseNeeds getExerciseNeeds() {
+    return this.exerciseNeeds;
   }
 
-  public void setExerciseNeeds(Boolean exerciseNeeds) {
-    ExerciseNeeds = exerciseNeeds;
+  public void setExerciseNeeds(ExerciseNeeds exerciseNeeds) {
+    this.exerciseNeeds = exerciseNeeds;
   }
 
   public EnergyLevel getEnergyLevel() {
-    return energyLevel;
+    return this.energyLevel;
   }
 
   public void setEnergyLevel(EnergyLevel energyLevel) {
@@ -280,31 +276,31 @@ public class DetailedPreferences {
   }
 
   public ActivityLevel getActivityLevel() {
-    return activityLevel;
+    return this.activityLevel;
   }
 
   public void setActivityLevel(ActivityLevel activityLevel) {
     this.activityLevel = activityLevel;
   }
 
-  public Boolean getGroomingNeeds() {
-    return groomingNeeds;
+  public GroomingNeeds getGroomingNeeds() {
+    return this.groomingNeeds;
   }
 
-  public void setGroomingNeeds(Boolean groomingNeeds) {
+  public void setGroomingNeeds(GroomingNeeds groomingNeeds) {
     this.groomingNeeds = groomingNeeds;
   }
 
-  public Boolean getShedding() {
-    return shedding;
+  public Shedding getShedding() {
+    return this.shedding;
   }
 
-  public void setShedding(Boolean shedding) {
+  public void setShedding(Shedding shedding) {
     this.shedding = shedding;
   }
 
   public Boolean getGoofy() {
-    return goofy;
+    return this.goofy;
   }
 
   public void setGoofy(Boolean goofy) {
@@ -312,7 +308,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getHypoallergenic() {
-    return hypoallergenic;
+    return this.hypoallergenic;
   }
 
   public void setHypoallergenic(Boolean hypoallergenic) {
@@ -320,7 +316,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getCarTrained() {
-    return carTrained;
+    return this.carTrained;
   }
 
   public void setCarTrained(Boolean carTrained) {
@@ -328,7 +324,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getLeashTrained() {
-    return leashTrained;
+    return this.leashTrained;
   }
 
   public void setLeashTrained(Boolean leashTrained) {
@@ -336,7 +332,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getLikesToFetch() {
-    return likesToFetch;
+    return this.likesToFetch;
   }
 
   public void setLikesToFetch(Boolean likesToFetch) {
@@ -344,7 +340,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getLikesToys() {
-    return likesToys;
+    return this.likesToys;
   }
 
   public void setLikesToys(Boolean likesToys) {
@@ -352,7 +348,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getLikesSwimming() {
-    return likesSwimming;
+    return this.likesSwimming;
   }
 
   public void setLikesSwimming(Boolean likesSwimming) {
@@ -360,7 +356,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getLikesLaps() {
-    return likesLaps;
+    return this.likesLaps;
   }
 
   public void setLikesLaps(Boolean likesLaps) {
@@ -368,7 +364,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getApartment() {
-    return apartment;
+    return this.apartment;
   }
 
   public void setApartment(Boolean apartment) {
@@ -376,7 +372,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getProtective() {
-    return protective;
+    return this.protective;
   }
 
   public void setProtective(Boolean protective) {
@@ -384,7 +380,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getObedient() {
-    return obedient;
+    return this.obedient;
   }
 
   public void setObedient(Boolean obedient) {
@@ -392,7 +388,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getPlayful() {
-    return playful;
+    return this.playful;
   }
 
   public void setPlayful(Boolean playful) {
@@ -400,7 +396,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getTimidShy() {
-    return timidShy;
+    return this.timidShy;
   }
 
   public void setTimidShy(Boolean timidShy) {
@@ -408,7 +404,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getIndependent() {
-    return independent;
+    return this.independent;
   }
 
   public void setIndependent(Boolean independent) {
@@ -416,7 +412,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getAffectionate() {
-    return affectionate;
+    return this.affectionate;
   }
 
   public void setAffectionate(Boolean affectionate) {
@@ -424,7 +420,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getEagerToPlease() {
-    return eagerToPlease;
+    return this.eagerToPlease;
   }
 
   public void setEagerToPlease(Boolean eagerToPlease) {
@@ -432,7 +428,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getEvenTempered() {
-    return evenTempered;
+    return this.evenTempered;
   }
 
   public void setEvenTempered(Boolean evenTempered) {
@@ -440,7 +436,7 @@ public class DetailedPreferences {
   }
 
   public Boolean getGentle() {
-    return gentle;
+    return this.gentle;
   }
 
   public void setGentle(Boolean gentle) {
@@ -448,7 +444,7 @@ public class DetailedPreferences {
   }
 
   public Integer getUserId() {
-    return userId;
+    return this.userId;
   }
 
   public void setUserId(Integer userId) {
@@ -457,45 +453,22 @@ public class DetailedPreferences {
 
   @Override
   public String toString() {
-    return "DetailedPreferences{" +
-        "detailedPreferencesId=" + detailedPreferencesId +
-        ", oKWithDogs=" + oKWithDogs +
-        ", oKWithCats=" + oKWithCats +
-        ", oKWithKids=" + oKWithKids +
-        ", oKWithAdults=" + oKWithAdults +
-        ", oKWithFarm=" + oKWithFarm +
-        ", goodWithSeniors=" + goodWithSeniors +
-        ", declawed=" + declawed +
-        ", color='" + color + '\'' +
-        ", upToDate=" + upToDate +
-        ", pictures=" + pictures +
-        ", videos=" + videos +
-        ", obedienceTraining=" + obedienceTraining +
-        ", fee=" + fee +
-        ", ExerciseNeeds=" + ExerciseNeeds +
-        ", energyLevel=" + energyLevel +
-        ", activityLevel=" + activityLevel +
-        ", groomingNeeds=" + groomingNeeds +
-        ", shedding=" + shedding +
-        ", goofy=" + goofy +
-        ", hypoallergenic=" + hypoallergenic +
-        ", carTrained=" + carTrained +
-        ", leashTrained=" + leashTrained +
-        ", likesToFetch=" + likesToFetch +
-        ", likesToys=" + likesToys +
-        ", likesSwimming=" + likesSwimming +
-        ", likesLaps=" + likesLaps +
-        ", apartment=" + apartment +
-        ", protective=" + protective +
-        ", obedient=" + obedient +
-        ", playful=" + playful +
-        ", timidShy=" + timidShy +
-        ", independent=" + independent +
-        ", affectionate=" + affectionate +
-        ", eagerToPlease=" + eagerToPlease +
-        ", evenTempered=" + evenTempered +
-        ", gentle=" + gentle +
-        ", userId=" + userId +
-        '}';
+    return "DetailedPreferences{" + "detailedPreferencesId=" + this.detailedPreferencesId
+        + ", oKWithDogs=" + this.oKWithDogs + ", oKWithCats=" + this.oKWithCats + ", oKWithKids="
+        + this.oKWithKids + ", oKWithAdults=" + this.oKWithAdults + ", oKWithFarm="
+        + this.oKWithFarm + ", goodWithSeniors=" + this.goodWithSeniors + ", declawed="
+        + this.declawed + ", color='" + this.color + '\'' + ", upToDate=" + this.upToDate
+        + ", pictures=" + this.pictures + ", videos=" + this.videos + ", obedienceTraining="
+        + this.obedienceTraining + ", fee=" + this.fee + ", ExerciseNeeds=" + this.exerciseNeeds
+        + ", energyLevel=" + this.energyLevel + ", activityLevel=" + this.activityLevel
+        + ", groomingNeeds=" + this.groomingNeeds + ", shedding=" + this.shedding + ", goofy="
+        + this.goofy + ", hypoallergenic=" + this.hypoallergenic + ", carTrained=" + this.carTrained
+        + ", leashTrained=" + this.leashTrained + ", likesToFetch=" + this.likesToFetch
+        + ", likesToys=" + this.likesToys + ", likesSwimming=" + this.likesSwimming + ", likesLaps="
+        + this.likesLaps + ", apartment=" + this.apartment + ", protective=" + this.protective
+        + ", obedient=" + this.obedient + ", playful=" + this.playful + ", timidShy="
+        + this.timidShy + ", independent=" + this.independent + ", affectionate="
+        + this.affectionate + ", eagerToPlease=" + this.eagerToPlease + ", evenTempered="
+        + this.evenTempered + ", gentle=" + this.gentle + ", userId=" + this.userId + '}';
   }
 }

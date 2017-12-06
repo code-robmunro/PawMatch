@@ -1,78 +1,47 @@
 package pawmatch.dal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import pawmatch.model.DetailedPreferences;
-import pawmatch.model.Enums;
 
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class DetailedPreferencesDao extends AbstractDao {
+public class DetailedPreferencesDao {
 
   private ConnectionManager connectionManager;
   private static DetailedPreferencesDao instance = null;
 
   private DetailedPreferencesDao() {
-    connectionManager = new ConnectionManager();
+    this.connectionManager = new ConnectionManager();
   }
 
   public static DetailedPreferencesDao getInstance() {
-    if(instance == null) {
-      instance = new DetailedPreferencesDao();
+    if (DetailedPreferencesDao.instance == null) {
+      DetailedPreferencesDao.instance = new DetailedPreferencesDao();
     }
-    return instance;
+    return DetailedPreferencesDao.instance;
   }
 
   public DetailedPreferences create(DetailedPreferences detailedPreference) throws SQLException {
-    String insertDetailedPreference =
-        "INSERT INTO DetailedPreferences(`OKWithDogs`,\n" +
-            "`OKWithCats`,\n" +
-            "`OKWithKids`,\n" +
-            "`OKWithAdults`,\n" +
-            "`OKWithFarm`,\n" +
-            "`GoodWithSeniors`,\n" +
-            "`Declawed`,\n" +
-            "`Color`,\n" +
-            "`UpToDate`,\n" +
-            "`Pictures`,\n" +
-            "`Videos`,\n" +
-            "`ObedienceTraining`,\n" +
-            "`Fee`,\n" +
-            "`ExerciseNeeds`,\n" +
-            "`EnergyLevel`,\n" +
-            "`ActivityLevel`,\n" +
-            "`GroomingNeeds`,\n" +
-            "`Shedding`,\n" +
-            "`Goofy`,\n" +
-            "`Hypoallergenic`,\n" +
-            "`CarTrained`,\n" +
-            "`LeashTrained`,\n" +
-            "`LikesToFetch`,\n" +
-            "`LikesToys`,\n" +
-            "`LikesSwimming`,\n" +
-            "`LikesLaps`,\n" +
-            "`Apartment`,\n" +
-            "`Protective`,\n" +
-            "`Obedient`,\n" +
-            "`Playful`,\n" +
-            "`TimidShy`,\n" +
-            "`Independent`,\n" +
-            "`Affectionate`,\n" +
-            "`EagerToPlease`,\n" +
-            "`EvenTempered`,\n" +
-            "`Gentle`,\n" +
-            "`UserId`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+    String insertDetailedPreference = "INSERT INTO DetailedPreferences(`OKWithDogs`,\n"
+        + "`OKWithCats`,\n" + "`OKWithKids`,\n" + "`OKWithAdults`,\n" + "`OKWithFarm`,\n"
+        + "`GoodWithSeniors`,\n" + "`Declawed`,\n" + "`Color`,\n" + "`UpToDate`,\n"
+        + "`Pictures`,\n" + "`Videos`,\n" + "`ObedienceTraining`,\n" + "`Fee`,\n"
+        + "`ExerciseNeeds`,\n" + "`EnergyLevel`,\n" + "`ActivityLevel`,\n" + "`GroomingNeeds`,\n"
+        + "`Shedding`,\n" + "`Goofy`,\n" + "`Hypoallergenic`,\n" + "`CarTrained`,\n"
+        + "`LeashTrained`,\n" + "`LikesToFetch`,\n" + "`LikesToys`,\n" + "`LikesSwimming`,\n"
+        + "`LikesLaps`,\n" + "`Apartment`,\n" + "`Protective`,\n" + "`Obedient`,\n" + "`Playful`,\n"
+        + "`TimidShy`,\n" + "`Independent`,\n" + "`Affectionate`,\n" + "`EagerToPlease`,\n"
+        + "`EvenTempered`,\n" + "`Gentle`,\n"
+        + "`UserId`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
     ResultSet resultKey = null;
     try {
-      connection = connectionManager.getConnection();
-      insertStmt = connection.prepareStatement(insertDetailedPreference, Statement.RETURN_GENERATED_KEYS);
+      connection = this.connectionManager.getConnection();
+      insertStmt =
+          connection.prepareStatement(insertDetailedPreference, Statement.RETURN_GENERATED_KEYS);
       insertStmt.setBoolean(1, detailedPreference.getoKWithDogs());
       insertStmt.setBoolean(2, detailedPreference.getoKWithCats());
       insertStmt.setBoolean(3, detailedPreference.getoKWithKids());
@@ -84,13 +53,12 @@ public class DetailedPreferencesDao extends AbstractDao {
       insertStmt.setBoolean(9, detailedPreference.getUpToDate());
       insertStmt.setBoolean(10, detailedPreference.getPictures());
       insertStmt.setBoolean(11, detailedPreference.getVideos());
-      insertStmt.setBoolean(12, detailedPreference.getObedienceTraining());
+      insertStmt.setString(12, detailedPreference.getObedienceTraining().toString());
       insertStmt.setInt(13, detailedPreference.getFee());
-      insertStmt.setBoolean(14, detailedPreference.getExerciseNeeds());
       insertStmt.setString(15, detailedPreference.getEnergyLevel().toString());
       insertStmt.setString(16, detailedPreference.getActivityLevel().toString());
-      insertStmt.setBoolean(17, detailedPreference.getGroomingNeeds());
-      insertStmt.setBoolean(18, detailedPreference.getShedding());
+      insertStmt.setString(17, detailedPreference.getGroomingNeeds().toString());
+      insertStmt.setString(18, detailedPreference.getShedding().toString());
       insertStmt.setBoolean(19, detailedPreference.getGoofy());
       insertStmt.setBoolean(20, detailedPreference.getHypoallergenic());
       insertStmt.setBoolean(21, detailedPreference.getCarTrained());
@@ -126,21 +94,25 @@ public class DetailedPreferencesDao extends AbstractDao {
       e.printStackTrace();
       throw e;
     } finally {
-      if (connection != null)
+      if (connection != null) {
         connection.close();
-      if (insertStmt != null)
+      }
+      if (insertStmt != null) {
         insertStmt.close();
-      if (resultKey != null)
+      }
+      if (resultKey != null) {
         resultKey.close();
+      }
     }
   }
 
   public DetailedPreferences delete(DetailedPreferences detailedPreference) throws SQLException {
-    String deletedetailedPreference = "DELETE FROM DetailedPreferences WHERE DetailedPreferencesId=?;";
+    String deletedetailedPreference =
+        "DELETE FROM DetailedPreferences WHERE DetailedPreferencesId=?;";
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {
-      connection = connectionManager.getConnection();
+      connection = this.connectionManager.getConnection();
       deleteStmt = connection.prepareStatement(deletedetailedPreference);
       deleteStmt.setInt(1, detailedPreference.getDetailedPreferencesId());
       deleteStmt.executeUpdate();
@@ -150,89 +122,12 @@ public class DetailedPreferencesDao extends AbstractDao {
       e.printStackTrace();
       throw e;
     } finally {
-      if(connection != null) {
+      if (connection != null) {
         connection.close();
       }
-      if(deleteStmt != null) {
+      if (deleteStmt != null) {
         deleteStmt.close();
       }
     }
   }
-
-  public DetailedPreferences getDetailedPrefsByUserId(int userId) throws SQLException {
-    String selectDetailedprefs =
-        "SELECT * FROM DetailedPreferences WHERE userId=?;";
-    Connection connection = null;
-    PreparedStatement selectStmt = null;
-    ResultSet results = null;
-    try {
-      connection = connectionManager.getConnection();
-      selectStmt = connection.prepareStatement(selectDetailedprefs);
-      selectStmt.setInt(1, userId);
-      results = selectStmt.executeQuery();
-      if(results.next()) {
-        Integer detailedPreferencesId = results.getInt("DetailedPreferencesId");
-        Boolean okDogs = results.getBoolean("OKWithDogs");
-        Boolean okCats = results.getBoolean("OKWithCats");
-        Boolean okKids = results.getBoolean("OKWithKids");
-        Boolean okAdults = results.getBoolean("OKWithAdults");
-        Boolean okFarm = results.getBoolean("OKWithFarm");
-        Boolean seniors = results.getBoolean("GoodWithSeniors");
-        Boolean declawed = results.getBoolean("Declawed");
-        String color = results.getString("Color");
-        Boolean upToDate = results.getBoolean("UpToDate");
-        Boolean pictures = results.getBoolean("Pictures");
-        Boolean videos = results.getBoolean("Videos");
-        Boolean obedience = results.getBoolean("ObedienceTraining");
-        Integer fee = results.getInt("Fee");
-        Boolean exercise = results.getBoolean("ExerciseNeeds");
-        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(parseValue(results, "EnergyLevel"));
-        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
-        Boolean grooming = results.getBoolean("GroomingNeeds");
-        Boolean shedding = results.getBoolean("Shedding");
-        Boolean goofy = results.getBoolean("Goofy");
-        Boolean hypoallergenic = results.getBoolean("Hypoallergenic");
-        Boolean carTrained = results.getBoolean("CarTrained");
-        Boolean leashTrained = results.getBoolean("LeashTrained");
-        Boolean likesToFetch = results.getBoolean("LikesToFetch");
-        Boolean likesToys = results.getBoolean("LikesToys");
-        Boolean likesSwimming = results.getBoolean("LikesSwimming");
-        Boolean likesLaps = results.getBoolean("LikesLaps");
-        Boolean apartment = results.getBoolean("Apartment");
-        Boolean protective = results.getBoolean("Protective");
-        Boolean obedient = results.getBoolean("Obedient");
-        Boolean playful = results.getBoolean("Playful");
-        Boolean timidShy = results.getBoolean("TimidShy");
-        Boolean independent = results.getBoolean("Independent");
-        Boolean affectionate = results.getBoolean("Affectionate");
-        Boolean eagerToPlease = results.getBoolean("EagerToPlease");
-        Boolean evenTempered = results.getBoolean("EvenTempered");
-        Boolean gentle = results.getBoolean("Gentle");
-        Integer resultUserId = results.getInt("UserId");
-
-        DetailedPreferences prefs = new DetailedPreferences(detailedPreferencesId, okDogs, okCats, okKids,
-            okAdults, okFarm, seniors, declawed, color, upToDate, pictures, videos, obedience, fee,
-            exercise, energyLevel, activityLevel, grooming, shedding, goofy, hypoallergenic, carTrained,
-            leashTrained, likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective,
-            obedient, playful, timidShy, independent, affectionate, eagerToPlease, evenTempered,
-            gentle, resultUserId);
-        return prefs;
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-      throw e;
-    } finally {
-      if(connection != null) {
-        connection.close();
-      }
-      if(selectStmt != null) {
-        selectStmt.close();
-      }
-      if(results != null) {
-        results.close();
-      }
-    }
-    return null;
-  }
-
 }
