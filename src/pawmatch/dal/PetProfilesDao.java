@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import pawmatch.mappers.PetProfilesMapper;
 import pawmatch.model.Enums;
 import pawmatch.model.PetProfiles;
 import pawmatch.model.Users;
@@ -126,75 +127,7 @@ public class PetProfilesDao extends AbstractDao {
       results = queryStmt.executeQuery();
 
       while (results.next()) {
-        int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
-        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
-        String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(results.getString("Age").toUpperCase());
-        Enums.Size size = Enums.Size.valueOf(results.getString("Size").toUpperCase());
-        boolean houseTrained = results.getBoolean("HouseTrained");
-        String l = results.getString("CoatLength").length() < 1 ? "EMPTY"
-            : results.getString("CoatLength");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(l.toUpperCase());
-        int location = results.getInt("Location");
-        boolean shelteredLonger = results.getBoolean("ShelteredLonger");
-        int picturesId = results.getInt("PicturesId");
-        int videosId = results.getInt("VideosId");
-        int shelterProfileId = results.getInt("ShelterProfileId");
-        boolean okWithKids = results.getBoolean("OkWithKids");
-        boolean okWithDogs = results.getBoolean("OkWithDogs");
-        boolean okWithCats = results.getBoolean("OkWithCats");
-        boolean okWithAdults = results.getBoolean("OkWithAdults");
-        boolean okWithFarm = results.getBoolean("OkWithFarm");
-        boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
-        boolean declawed = results.getBoolean("Declawed");
-        String color = results.getString("Color");
-        boolean upToDate = results.getBoolean("UpToDate");
-        l = results.getString("ObedienceTraining").length() < 1 ? "EMPTY"
-            : results.getString("ObedienceTraining");
-        Enums.ObedienceTraining obedienceTraining =
-            Enums.ObedienceTraining.valueOf(l.toUpperCase());
-        int fee = results.getInt("Fee");
-        l = results.getString("ExerciseNeeds").length() < 1 ? "EMPTY"
-            : results.getString("ExerciseNeeds");
-        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(l.toUpperCase());
-        l = results.getString("EnergyLevel").length() < 1 ? "EMPTY"
-            : results.getString("EnergyLevel");
-        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(l.toUpperCase());
-        l = results.getString("ActivityLevel").length() < 1 ? "EMPTY"
-            : results.getString("ActivityLevel");
-        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(l.toUpperCase());
-        l = results.getString("GroomingNeeds").length() < 1 ? "EMPTY"
-            : results.getString("GroomingNeeds");
-        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(l.toUpperCase());
-        l = results.getString("Shedding").length() < 1 ? "EMPTY" : results.getString("Shedding");
-        Enums.Shedding shedding = Enums.Shedding.valueOf(l.toUpperCase());
-        Boolean goofy = results.getBoolean("Goofy");
-        Boolean hypoallergenic = results.getBoolean("Hypoallergenic");
-        Boolean carTrained = results.getBoolean("CarTrained");
-        Boolean leashTrained = results.getBoolean("LeashTrained");
-        Boolean likesToFetch = results.getBoolean("LikesToFetch");
-        Boolean likesToys = results.getBoolean("LikesToys");
-        Boolean likesSwimming = results.getBoolean("LikesSwimming");
-        Boolean likesLaps = results.getBoolean("LikesLaps");
-        Boolean apartment = results.getBoolean("Apartment");
-        Boolean protective = results.getBoolean("Protective");
-        Boolean obedient = results.getBoolean("Obedient");
-        Boolean playful = results.getBoolean("Playful");
-        Boolean timidShy = results.getBoolean("TimidShy");
-        Boolean independent = results.getBoolean("Independent");
-        Boolean affectionate = results.getBoolean("Affectionate");
-        Boolean eagerToPlease = results.getBoolean("EagerToPlease");
-        Boolean evenTempered = results.getBoolean("EvenTempered");
-        Boolean gentle = results.getBoolean("Gentle");
-        PetProfiles profile =
-            new PetProfiles(profileId, species, sex, breed, age, size, houseTrained, coatLength,
-                location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
-                okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
-                upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
-                groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
-                likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
-                playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
+        PetProfiles profile = new PetProfilesMapper().mapRow(results);
         profiles.add(profile);
       }
     } catch (SQLException e) {
@@ -230,63 +163,7 @@ public class PetProfilesDao extends AbstractDao {
       results = queryStmt.executeQuery();
 
       while (results.next()) {
-        int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
-        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
-        String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
-        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
-        boolean housetrained = results.getBoolean("HouseTrained");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
-        int location = results.getInt("Location");
-        boolean shelteredLonger = results.getBoolean("ShelteredLonger");
-        int picturesId = results.getInt("PicturesId");
-        int videosId = results.getInt("VideosId");
-        int shelterProfileId = results.getInt("ShelterProfileId");
-        boolean okWithKids = results.getBoolean("OKWithKids");
-        boolean okWithDogs = results.getBoolean("OKWithDogs");
-        boolean okWithCats = results.getBoolean("OKWithCats");
-        boolean okWithAdults = results.getBoolean("OKWithAdults");
-        boolean okWithFarm = results.getBoolean("OKWithFarm");
-        boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
-        boolean declawed = results.getBoolean("Declawed");
-        String color = results.getString("Color");
-        boolean upToDate = results.getBoolean("UpToDate");
-        Enums.ObedienceTraining obedienceTraining =
-            Enums.ObedienceTraining.valueOf(parseValue(results, "ObedienceTraining"));
-        int fee = results.getInt("Fee");
-        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(parseValue(results, "ExerciseNeeds"));
-        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(parseValue(results, "EnergyLevel"));
-        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
-        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(parseValue(results, "GroomingNeeds"));
-        Enums.Shedding shedding = Enums.Shedding.valueOf(parseValue(results, "Shedding"));
-        boolean goofy = results.getBoolean("Goofy");
-        boolean hypoallergenic = results.getBoolean("Hypoallergenic");
-        boolean carTrained = results.getBoolean("CarTrained");
-        boolean leashTrained = results.getBoolean("LeashTrained");
-        boolean likesToFetch = results.getBoolean("LikesToFetch");
-        boolean likesToys = results.getBoolean("LikesToys");
-        boolean likesSwimming = results.getBoolean("LikesSwimming");
-        boolean likesLaps = results.getBoolean("LikesLaps");
-        boolean apartment = results.getBoolean("Apartment");
-        boolean protective = results.getBoolean("Protective");
-        boolean obedient = results.getBoolean("Obedient");
-        boolean timidShy = results.getBoolean("TimidShy");
-        boolean playful = results.getBoolean("Playful");
-        boolean independent = results.getBoolean("Independent");
-        boolean affectionate = results.getBoolean("Affectionate");
-        boolean eagerToPlease = results.getBoolean("EagerToPlease");
-        boolean evenTempered = results.getBoolean("EvenTempered");
-        boolean gentle = results.getBoolean("Gentle");
-
-        PetProfiles profile =
-            new PetProfiles(profileId, species, sex, breed, age, size, housetrained, coatLength,
-                location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
-                okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
-                upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
-                groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
-                likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
-                playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
+        PetProfiles profile = new PetProfilesMapper().mapRow(results);
         profiles.add(profile);
       }
     } catch (SQLException e) {
@@ -320,63 +197,7 @@ public class PetProfilesDao extends AbstractDao {
       results = queryStmt.executeQuery();
 
       while (results.next()) {
-        int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
-        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
-        String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
-        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
-        boolean housetrained = results.getBoolean("HouseTrained");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
-        int location = results.getInt("Location");
-        boolean shelteredLonger = results.getBoolean("ShelteredLonger");
-        int picturesId = results.getInt("PicturesId");
-        int videosId = results.getInt("VideosId");
-        int shelterProfileId = results.getInt("ShelterProfileId");
-        boolean okWithKids = results.getBoolean("OKWithKids");
-        boolean okWithDogs = results.getBoolean("OKWithDogs");
-        boolean okWithCats = results.getBoolean("OKWithCats");
-        boolean okWithAdults = results.getBoolean("OKWithAdults");
-        boolean okWithFarm = results.getBoolean("OKWithFarm");
-        boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
-        boolean declawed = results.getBoolean("Declawed");
-        String color = results.getString("Color");
-        boolean upToDate = results.getBoolean("UpToDate");
-        Enums.ObedienceTraining obedienceTraining =
-            Enums.ObedienceTraining.valueOf(parseValue(results, "ObedienceTraining"));
-        int fee = results.getInt("Fee");
-        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(parseValue(results, "ExerciseNeeds"));
-        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(parseValue(results, "EnergyLevel"));
-        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
-        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(parseValue(results, "GroomingNeeds"));
-        Enums.Shedding shedding = Enums.Shedding.valueOf(parseValue(results, "Shedding"));
-        boolean goofy = results.getBoolean("Goofy");
-        boolean hypoallergenic = results.getBoolean("Hypoallergenic");
-        boolean carTrained = results.getBoolean("CarTrained");
-        boolean leashTrained = results.getBoolean("LeashTrained");
-        boolean likesToFetch = results.getBoolean("LikesToFetch");
-        boolean likesToys = results.getBoolean("LikesToys");
-        boolean likesSwimming = results.getBoolean("LikesSwimming");
-        boolean likesLaps = results.getBoolean("LikesLaps");
-        boolean apartment = results.getBoolean("Apartment");
-        boolean protective = results.getBoolean("Protective");
-        boolean obedient = results.getBoolean("Obedient");
-        boolean timidShy = results.getBoolean("TimidShy");
-        boolean playful = results.getBoolean("Playful");
-        boolean independent = results.getBoolean("Independent");
-        boolean affectionate = results.getBoolean("Affectionate");
-        boolean eagerToPlease = results.getBoolean("EagerToPlease");
-        boolean evenTempered = results.getBoolean("EvenTempered");
-        boolean gentle = results.getBoolean("Gentle");
-
-        PetProfiles profile =
-            new PetProfiles(profileId, species, sex, breed, age, size, housetrained, coatLength,
-                location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
-                okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
-                upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
-                groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
-                likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
-                playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
+        PetProfiles profile = new PetProfilesMapper().mapRow(results);
         profiles.add(profile);
       }
     } catch (SQLException e) {
