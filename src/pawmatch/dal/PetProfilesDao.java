@@ -219,23 +219,7 @@ public class PetProfilesDao extends AbstractDao {
    */
   public List<PetProfiles> matchPetsToSimplePrefs(Users user) throws SQLException {
     List<PetProfiles> profiles = new ArrayList<>();
-    String petsQuery = "SELECT *, \n"
-        + "\t(IF(PetProfiles.Species=User2Prefs.Species  OR User2Prefs.Species IS NULL, 1, 0)\n"
-        + "\t\t+ IF(PetProfiles.Age=User2Prefs.Age OR User2Prefs.Sex IS NULL, 1, 0)\n"
-        + "\t\t+ IF(PetProfiles.Size=User2Prefs.Size OR User2Prefs.Size IS NULL, 1, 0)\n"
-        + "\t\t+ IF(PetProfiles.CoatLength=User2Prefs.CoatLength \n"
-        + "OR User2Prefs.CoatLength IS NULL, 1, 0)\n" + "\t\t+ IF((User2Prefs.HasMedia='Yes'\n"
-        + "\t\t\tAND (PetProfiles.PicturesId IS NOT NULL \n"
-        + "OR PetProfiles.VideosId IS NOT NULL)) \n"
-        + "\t\t\tOR User2Prefs.HasMedia IS NULL, 1, 0)) as MatchScore\n"
-        + "\tFROM PetProfiles INNER JOIN \n"
-        + "    (SELECT * FROM SimplePreferences WHERE UserId=?) as User2Prefs\n"
-        + "    ON (PetProfiles.Species=User2Prefs.Species OR User2Prefs.Species IS NULL)\n"
-        + "\t\tAND (PetProfiles.Sex=User2Prefs.Sex OR User2Prefs.Sex IS NULL)\n"
-        + "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', User2Prefs.Breed, '%') \n"
-        + "\t\t\t\tOR User2Prefs.Breed IS NULL)\n"
-        + "\t\tAND ((PetProfiles.Location - User2Prefs.Location) BETWEEN -5 AND 5\n"
-        + "\t\t\tOR User2Prefs.Location IS NULL)\n" + "\tORDER BY MatchScore DESC;";
+    String petsQuery = SIMPLE_PETS_QUERY;
     Connection connection = null;
     PreparedStatement queryStmt = null;
     ResultSet results = null;
@@ -259,11 +243,11 @@ public class PetProfilesDao extends AbstractDao {
         int picturesId = results.getInt("PicturesId");
         int videosId = results.getInt("VideosId");
         int shelterProfileId = results.getInt("ShelterProfileId");
-        boolean okWithKids = results.getBoolean("OkWithKids");
-        boolean okWithDogs = results.getBoolean("OkWithDogs");
-        boolean okWithCats = results.getBoolean("OkWithCats");
-        boolean okWithAdults = results.getBoolean("OkWithAdults");
-        boolean okWithFarm = results.getBoolean("OkWithFarm");
+        boolean okWithKids = results.getBoolean("OKWithKids");
+        boolean okWithDogs = results.getBoolean("OKWithDogs");
+        boolean okWithCats = results.getBoolean("OKWithCats");
+        boolean okWithAdults = results.getBoolean("OKWithAdults");
+        boolean okWithFarm = results.getBoolean("OKWithFarm");
         boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
         boolean declawed = results.getBoolean("Declawed");
         String color = results.getString("Color");
@@ -330,7 +314,7 @@ public class PetProfilesDao extends AbstractDao {
     ResultSet results = null;
     try {
       connection = this.connectionManager.getConnection();
-      queryStmt = connection.prepareStatement(detailedPetsQuery);
+      queryStmt = connection.prepareStatement(DETAILED_PETS_QUERY);
       queryStmt.setInt(1, user.getUserId());
       queryStmt.setInt(2, user.getUserId());
       results = queryStmt.executeQuery();
@@ -349,11 +333,11 @@ public class PetProfilesDao extends AbstractDao {
         int picturesId = results.getInt("PicturesId");
         int videosId = results.getInt("VideosId");
         int shelterProfileId = results.getInt("ShelterProfileId");
-        boolean okWithKids = results.getBoolean("OkWithKids");
-        boolean okWithDogs = results.getBoolean("OkWithDogs");
-        boolean okWithCats = results.getBoolean("OkWithCats");
-        boolean okWithAdults = results.getBoolean("OkWithAdults");
-        boolean okWithFarm = results.getBoolean("OkWithFarm");
+        boolean okWithKids = results.getBoolean("OKWithKids");
+        boolean okWithDogs = results.getBoolean("OKWithDogs");
+        boolean okWithCats = results.getBoolean("OKWithCats");
+        boolean okWithAdults = results.getBoolean("OKWithAdults");
+        boolean okWithFarm = results.getBoolean("OKWithFarm");
         boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
         boolean declawed = results.getBoolean("Declawed");
         String color = results.getString("Color");
@@ -412,8 +396,51 @@ public class PetProfilesDao extends AbstractDao {
     return profiles;
   }
 
-  private static final String detailedPetsQuery =
-      "SELECT *,\n" +
+
+  private static final String SELECT_ALL_FIELDS =
+      "SELECT DISTINCT PetProfiles.PetProfileId, PetProfiles.Species, PetProfiles.Sex, " +
+          "PetProfiles.Breed,\n" +
+          " \tPetProfiles.Age, PetProfiles.size, PetProfiles.HouseTrained, PetProfiles" +
+          ".CoatLength, PetProfiles.Location,\n" +
+          "     PetProfiles.ShelteredLonger, PetProfiles.PicturesId, PetProfiles.VideosId, " +
+          "PetProfiles.OKWithDogs,\n" +
+          "     PetProfiles.OKWithCats,  PetProfiles.OKWithKids, PetProfiles.OKWithAdults, " +
+          "PetProfiles.OKWithFarm, PetProfiles.GoodWithSeniors,\n" +
+          "     PetProfiles.Declawed, PetProfiles.Color, PetProfiles.UpToDate, PetProfiles" +
+          ".Pictures, PetProfiles.Videos,\n" +
+          "     PetProfiles.ObedienceTraining, PetProfiles.Fee, PetProfiles.ExerciseNeeds, " +
+          "PetProfiles.EnergyLevel,\n" +
+          "     PetProfiles.ActivityLevel, PetProfiles.GroomingNeeds, PetProfiles.Shedding, " +
+          "PetProfiles.Goofy,\n" +
+          "     PetProfiles.Hypoallergenic, PetProfiles.CarTrained, PetProfiles.LeashTrained, " +
+          "PetProfiles.LikesToFetch,\n" +
+          "     PetProfiles.LikesToys, PetProfiles.LikesSwimming, PetProfiles.LikesLaps, " +
+          "PetProfiles.Apartment, PetProfiles.Protective,\n" +
+          "     PetProfiles.Obedient, PetProfiles.Playful, PetProfiles.TimidShy, PetProfiles" +
+          ".Independent, PetProfiles.Affectionate,\n" +
+          "     PetProfiles.EagerToPlease, PetProfiles.EvenTempered, PetProfiles.Gentle, " +
+          "PetProfiles.ShelterProfileId,\n";
+
+  private static final String SIMPLE_PETS_QUERY = SELECT_ALL_FIELDS
+      + "\t(IF(PetProfiles.Species=User2Prefs.Species  OR User2Prefs.Species IS NULL, 1, 0)\n"
+      + "\t\t+ IF(PetProfiles.Age=User2Prefs.Age OR User2Prefs.Sex IS NULL, 1, 0)\n"
+      + "\t\t+ IF(PetProfiles.Size=User2Prefs.Size OR User2Prefs.Size IS NULL, 1, 0)\n"
+      + "\t\t+ IF(PetProfiles.CoatLength=User2Prefs.CoatLength \n"
+      + "OR User2Prefs.CoatLength IS NULL, 1, 0)\n" + "\t\t+ IF((User2Prefs.HasMedia='Yes'\n"
+      + "\t\t\tAND (PetProfiles.PicturesId IS NOT NULL \n"
+      + "OR PetProfiles.VideosId IS NOT NULL)) \n"
+      + "\t\t\tOR User2Prefs.HasMedia IS NULL, 1, 0)) as MatchScore\n"
+      + "\tFROM PetProfiles INNER JOIN \n"
+      + "    (SELECT * FROM SimplePreferences WHERE UserId=?) as User2Prefs\n"
+      + "    ON (PetProfiles.Species=User2Prefs.Species OR User2Prefs.Species IS NULL)\n"
+      + "\t\tAND (PetProfiles.Sex=User2Prefs.Sex OR User2Prefs.Sex IS NULL)\n"
+      + "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', User2Prefs.Breed, '%') \n"
+      + "\t\t\t\tOR User2Prefs.Breed IS NULL)\n"
+      + "\t\tAND ((PetProfiles.Location - User2Prefs.Location) BETWEEN -5 AND 5\n"
+      + "\t\t\tOR User2Prefs.Location IS NULL)\n" + "\tORDER BY MatchScore DESC;";
+
+  private static final String DETAILED_PETS_QUERY =
+      SELECT_ALL_FIELDS +
           "\t(IF(PetProfiles.Species=SimplePrefs.Species  OR SimplePrefs.Species IS NULL, 1, 0)\n" +
           "\t\t+ IF(PetProfiles.Age=SimplePrefs.Age OR SimplePrefs.Sex IS NULL, 1, 0)\n" +
           "\t\t+ IF(PetProfiles.Size=SimplePrefs.Size OR SimplePrefs.Size IS NULL, 1, 0)\n" +
