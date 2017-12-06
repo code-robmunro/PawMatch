@@ -276,7 +276,6 @@ public class PetProfilesDao extends AbstractDao {
         Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
         Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(parseValue(results, "GroomingNeeds"));
         Enums.Shedding shedding = Enums.Shedding.valueOf(parseValue(results, "Shedding"));
-
         boolean goofy = results.getBoolean("Goofy");
         boolean hypoallergenic = results.getBoolean("Hypoallergenic");
         boolean carTrained = results.getBoolean("CarTrained");
@@ -323,8 +322,189 @@ public class PetProfilesDao extends AbstractDao {
     return profiles;
   }
 
-  public List<PetProfiles> matchPetsToDetailedPrefs(Users userById) {
-    // TODO: fill in method
-    return new ArrayList<>();
+  public List<PetProfiles> matchPetsToDetailedPrefs(Users user) throws SQLException {
+    List<PetProfiles> profiles = new ArrayList<>();
+
+    Connection connection = null;
+    PreparedStatement queryStmt = null;
+    ResultSet results = null;
+    try {
+      connection = this.connectionManager.getConnection();
+      queryStmt = connection.prepareStatement(detailedPetsQuery);
+      queryStmt.setInt(1, user.getUserId());
+      queryStmt.setInt(2, user.getUserId());
+      results = queryStmt.executeQuery();
+
+      while (results.next()) {
+        int profileId = results.getInt("PetProfileId");
+        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
+        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
+        String breed = results.getString("Breed");
+        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
+        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
+        boolean housetrained = results.getBoolean("HouseTrained");
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
+        int location = results.getInt("Location");
+        boolean shelteredLonger = results.getBoolean("ShelteredLonger");
+        int picturesId = results.getInt("PicturesId");
+        int videosId = results.getInt("VideosId");
+        int shelterProfileId = results.getInt("ShelterProfileId");
+        boolean okWithKids = results.getBoolean("OkWithKids");
+        boolean okWithDogs = results.getBoolean("OkWithDogs");
+        boolean okWithCats = results.getBoolean("OkWithCats");
+        boolean okWithAdults = results.getBoolean("OkWithAdults");
+        boolean okWithFarm = results.getBoolean("OkWithFarm");
+        boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
+        boolean declawed = results.getBoolean("Declawed");
+        String color = results.getString("Color");
+        boolean upToDate = results.getBoolean("UpToDate");
+        Enums.ObedienceTraining obedienceTraining =
+            Enums.ObedienceTraining.valueOf(parseValue(results, "ObedienceTraining"));
+        int fee = results.getInt("Fee");
+        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(parseValue(results, "ExerciseNeeds"));
+        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(parseValue(results, "EnergyLevel"));
+        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(parseValue(results, "ActivityLevel"));
+        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(parseValue(results, "GroomingNeeds"));
+        Enums.Shedding shedding = Enums.Shedding.valueOf(parseValue(results, "Shedding"));
+        boolean goofy = results.getBoolean("Goofy");
+        boolean hypoallergenic = results.getBoolean("Hypoallergenic");
+        boolean carTrained = results.getBoolean("CarTrained");
+        boolean leashTrained = results.getBoolean("LeashTrained");
+        boolean likesToFetch = results.getBoolean("LikesToFetch");
+        boolean likesToys = results.getBoolean("LikesToys");
+        boolean likesSwimming = results.getBoolean("LikesSwimming");
+        boolean likesLaps = results.getBoolean("LikesLaps");
+        boolean apartment = results.getBoolean("Apartment");
+        boolean protective = results.getBoolean("Protective");
+        boolean obedient = results.getBoolean("Obedient");
+        boolean timidShy = results.getBoolean("TimidShy");
+        boolean playful = results.getBoolean("Playful");
+        boolean independent = results.getBoolean("Independent");
+        boolean affectionate = results.getBoolean("Affectionate");
+        boolean eagerToPlease = results.getBoolean("EagerToPlease");
+        boolean evenTempered = results.getBoolean("EvenTempered");
+        boolean gentle = results.getBoolean("Gentle");
+
+        PetProfiles profile =
+            new PetProfiles(profileId, species, sex, breed, age, size, housetrained, coatLength,
+                location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
+                okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
+                upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
+                groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
+                likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
+                playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
+        profiles.add(profile);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if (connection != null) {
+        connection.close();
+      }
+      if (queryStmt != null) {
+        queryStmt.close();
+      }
+      if (results != null) {
+        results.close();
+      }
+    }
+    return profiles;
   }
+
+  private static final String detailedPetsQuery =
+      "SELECT *,\n" +
+          "\t(IF(PetProfiles.Species=SimplePrefs.Species  OR SimplePrefs.Species IS NULL, 1, 0)\n" +
+          "\t\t+ IF(PetProfiles.Age=SimplePrefs.Age OR SimplePrefs.Sex IS NULL, 1, 0)\n" +
+          "\t\t+ IF(PetProfiles.Size=SimplePrefs.Size OR SimplePrefs.Size IS NULL, 1, 0)\n" +
+          "\t\t+ IF(PetProfiles.CoatLength=SimplePrefs.CoatLength OR SimplePrefs.CoatLength IS " +
+          "NULL, 1, 0)\n" +
+          "\t\t+ IF((SimplePrefs.HasMedia='Yes'\n" +
+          "\t\t\t\tAND (PetProfiles.PicturesId IS NOT NULL OR PetProfiles.VideosId IS NOT NULL)) " +
+          "\n" +
+          "\t\t\t\tOR SimplePrefs.HasMedia IS NULL, 1, 0)\n" +
+          "\t\t#Detailed Prefs\n" +
+          "\t\t+ IF(PetProfiles.Color=DetailedPrefs.Color OR DetailedPrefs.Color IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Fee=DetailedPrefs.Fee OR DetailedPrefs.Fee IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.EnergyLevel=DetailedPrefs.EnergyLevel OR DetailedPrefs" +
+          ".EnergyLevel IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.ActivityLevel=DetailedPrefs.ActivityLevel OR DetailedPrefs" +
+          ".ActivityLevel IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.OKWithDogs=DetailedPrefs.OKWithDogs OR DetailedPrefs" +
+          ".OKWithDogs IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.OKWithCats=DetailedPrefs.OKWithCats OR DetailedPrefs" +
+          ".OKWithCats IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.OKWithKids=DetailedPrefs.OKWithKids OR DetailedPrefs" +
+          ".OKWithKids IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.OKWithAdults=DetailedPrefs.OKWithAdults OR DetailedPrefs" +
+          ".OKWithAdults IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.OKWithFarm=DetailedPrefs.OKWithFarm OR DetailedPrefs" +
+          ".OKWithFarm IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.GoodWithSeniors=DetailedPrefs.GoodWithSeniors OR " +
+          "DetailedPrefs.GoodWithSeniors IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Declawed=DetailedPrefs.Declawed OR DetailedPrefs.Declawed IS " +
+          "NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.UpToDate=DetailedPrefs.UpToDate OR DetailedPrefs.UpToDate IS " +
+          "NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.ObedienceTraining=DetailedPrefs.ObedienceTraining OR " +
+          "DetailedPrefs.ObedienceTraining IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.ExerciseNeeds=DetailedPrefs.ExerciseNeeds OR DetailedPrefs" +
+          ".ExerciseNeeds IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.GroomingNeeds=DetailedPrefs.GroomingNeeds OR DetailedPrefs" +
+          ".GroomingNeeds IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Shedding=DetailedPrefs.Shedding OR DetailedPrefs.Shedding IS " +
+          "NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Goofy=DetailedPrefs.Goofy OR DetailedPrefs.Goofy IS NULL, 1, " +
+          "0)\n" +
+          "        + IF(PetProfiles.Hypoallergenic=DetailedPrefs.Hypoallergenic OR DetailedPrefs" +
+          ".Hypoallergenic IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.CarTrained=DetailedPrefs.CarTrained OR DetailedPrefs" +
+          ".CarTrained IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.LeashTrained=DetailedPrefs.LeashTrained OR DetailedPrefs" +
+          ".LeashTrained IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.LikesToFetch=DetailedPrefs.LikesToFetch OR DetailedPrefs" +
+          ".LikesToFetch IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.LikesToys=DetailedPrefs.LikesToys OR DetailedPrefs.LikesToys " +
+          "IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.LikesSwimming=DetailedPrefs.LikesSwimming OR DetailedPrefs" +
+          ".LikesSwimming IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.LikesLaps=DetailedPrefs.LikesLaps OR DetailedPrefs.LikesLaps " +
+          "IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Apartment=DetailedPrefs.Apartment OR DetailedPrefs.Apartment " +
+          "IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Protective=DetailedPrefs.Protective OR DetailedPrefs" +
+          ".Protective IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Obedient=DetailedPrefs.Obedient OR DetailedPrefs.Obedient IS " +
+          "NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Playful=DetailedPrefs.Playful OR DetailedPrefs.Playful IS " +
+          "NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.TimidShy=DetailedPrefs.TimidShy OR DetailedPrefs.TimidShy IS " +
+          "NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Independent=DetailedPrefs.Independent OR DetailedPrefs" +
+          ".Independent IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Affectionate=DetailedPrefs.Affectionate OR DetailedPrefs" +
+          ".Affectionate IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.EagerToPlease=DetailedPrefs.EagerToPlease OR DetailedPrefs" +
+          ".EagerToPlease IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.EvenTempered=DetailedPrefs.EvenTempered OR DetailedPrefs" +
+          ".EvenTempered IS NULL, 1, 0)\n" +
+          "        + IF(PetProfiles.Gentle=DetailedPrefs.Gentle OR DetailedPrefs.Gentle IS NULL, " +
+          "1, 0)\n" +
+          "        ) as MatchScore\n" +
+          "FROM PetProfiles INNER JOIN\n" +
+          "(\n" +
+          "# Combine Simple and Detailed prefs\n" +
+          "\t(\n" +
+          "SELECT * FROM DetailedPreferences WHERE UserId=?)as DetailedPrefs\n" +
+          "    LEFT JOIN\n" +
+          "    (SELECT * FROM SimplePreferences WHERE UserId=?) as SimplePrefs\n" +
+          "    USING(UserId)\n" +
+          "    )\n" +
+          "\tON (PetProfiles.Species=SimplePrefs.Species OR SimplePrefs.Species IS NULL)\n" +
+          "\t\tAND (PetProfiles.Sex=SimplePrefs.Sex OR SimplePrefs.Sex IS NULL)\n" +
+          "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', SimplePrefs.Breed, '%') \n" +
+          "\t\t\t\tOR SimplePrefs.Breed IS NULL)\n" +
+          "\t\tAND ((PetProfiles.Location - SimplePrefs.Location) BETWEEN -5 AND 5\n" +
+          "\t\t\tOR SimplePrefs.Location IS NULL)\n" +
+          "ORDER BY MatchScore DESC;";
 }
