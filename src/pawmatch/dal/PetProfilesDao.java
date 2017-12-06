@@ -1,10 +1,6 @@
 package pawmatch.dal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,31 +11,40 @@ import pawmatch.model.Users;
 /**
  * Created by Robert Munro on 11/12/2017.
  */
-public class PetProfilesDao extends AbstractDao {
+public class PetProfilesDao {
 
   private ConnectionManager connectionManager;
   private static PetProfilesDao instance = null;
 
   private PetProfilesDao() {
-    connectionManager = new ConnectionManager();
+    this.connectionManager = new ConnectionManager();
   }
 
   public static PetProfilesDao getInstance() {
-    if (instance == null) {
-      instance = new PetProfilesDao();
+    if (PetProfilesDao.instance == null) {
+      PetProfilesDao.instance = new PetProfilesDao();
     }
-    return instance;
+    return PetProfilesDao.instance;
   }
+
+
 
   public PetProfiles create(PetProfiles petProfile) throws SQLException {
     String insertpetProfile =
-        "INSERT INTO PetProfiles(Species, Sex, Breed, Age, Size, HouseTrained, CoatLength, Location," +
-            "ShelteredLonger, PicturesId, VideosId, ShelterProfileId) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+        "INSERT INTO PetProfiles(Species, Sex, Breed, Age, Size, HouseTrained, CoatLength,"
+            + " Location, ShelteredLonger, PicturesId, VideosId, OKWithDogs, OKWithCats, "
+            + "OKWithKids, OKWithAdults, OKWithFarm, GoodWithSeniors, Declawed, Color, UpToDate, "
+            + "ObedienceTraining, Fee, ExerciseNeeds, EnergyLevel, ActivityLevel, GroomingNeeds, "
+            + "Shedding, Goofy, Hypoallergenic, CarTrained, LeashTrained, LikesToFetch, LikesToys, "
+            + "LikesSwimming, LikesLaps, Apartment, Protective, Obedient, Playful, TimidShy, "
+            + "Independent, Affectionate, EagerToPlease, EvenTempered, Gentle, ShelterProfileId) "
+            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+            + "?,?,?,?,?,?,?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
     ResultSet resultKey = null;
     try {
-      connection = connectionManager.getConnection();
+      connection = this.connectionManager.getConnection();
       insertStmt = connection.prepareStatement(insertpetProfile, Statement.RETURN_GENERATED_KEYS);
       insertStmt.setString(1, petProfile.getSpecies().toString());
       insertStmt.setString(2, petProfile.getSex().toString());
@@ -69,12 +74,15 @@ public class PetProfilesDao extends AbstractDao {
       e.printStackTrace();
       throw e;
     } finally {
-      if (connection != null)
+      if (connection != null) {
         connection.close();
-      if (insertStmt != null)
+      }
+      if (insertStmt != null) {
         insertStmt.close();
-      if (resultKey != null)
+      }
+      if (resultKey != null) {
         resultKey.close();
+      }
     }
   }
 
@@ -83,7 +91,7 @@ public class PetProfilesDao extends AbstractDao {
     Connection connection = null;
     PreparedStatement deleteStmt = null;
     try {
-      connection = connectionManager.getConnection();
+      connection = this.connectionManager.getConnection();
       deleteStmt = connection.prepareStatement(deletepetProfile);
       deleteStmt.setInt(1, petProfile.getPetProfileId());
       deleteStmt.executeUpdate();
@@ -103,37 +111,90 @@ public class PetProfilesDao extends AbstractDao {
   }
 
   /*
-  What animals are located near me?
+   * What animals are located near me?
    */
   public List<PetProfiles> searchPetsByLocation(int zipcode) throws SQLException {
     List<PetProfiles> profiles = new ArrayList<>();
-    String findPets =
-        "SELECT * FROM PetProfiles WHERE Location=?;";
+    String findPets = "SELECT * FROM PetProfiles WHERE Location=?;";
     Connection connection = null;
     PreparedStatement queryStmt = null;
     ResultSet results = null;
     try {
-      connection = connectionManager.getConnection();
+      connection = this.connectionManager.getConnection();
       queryStmt = connection.prepareStatement(findPets);
       queryStmt.setInt(1, zipcode);
       results = queryStmt.executeQuery();
 
       while (results.next()) {
         int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(parseValue(results, "Species"));
-        Enums.Sex sex = Enums.Sex.valueOf(parseValue(results,"Sex"));
+        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
+        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
         String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(parseValue(results,"Age"));
-        Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
-        boolean housetrained = results.getBoolean("HouseTrained");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
+        Enums.Age age = Enums.Age.valueOf(results.getString("Age").toUpperCase());
+        Enums.Size size = Enums.Size.valueOf(results.getString("Size").toUpperCase());
+        boolean houseTrained = results.getBoolean("HouseTrained");
+        String l = results.getString("CoatLength").length() < 1 ? "EMPTY"
+            : results.getString("CoatLength");
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(l.toUpperCase());
         int location = results.getInt("Location");
         boolean shelteredLonger = results.getBoolean("ShelteredLonger");
         int picturesId = results.getInt("PicturesId");
         int videosId = results.getInt("VideosId");
         int shelterProfileId = results.getInt("ShelterProfileId");
-        PetProfiles profile = new PetProfiles(profileId, species, sex, breed, age, size, housetrained,
-            coatLength, location, shelteredLonger, picturesId, videosId, shelterProfileId);
+        boolean okWithKids = results.getBoolean("OkWithKids");
+        boolean okWithDogs = results.getBoolean("OkWithDogs");
+        boolean okWithCats = results.getBoolean("OkWithCats");
+        boolean okWithAdults = results.getBoolean("OkWithAdults");
+        boolean okWithFarm = results.getBoolean("OkWithFarm");
+        boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
+        boolean declawed = results.getBoolean("Declawed");
+        String color = results.getString("Color");
+        boolean upToDate = results.getBoolean("UpToDate");
+        l = results.getString("ObedienceTraining").length() < 1 ? "EMPTY"
+            : results.getString("ObedienceTraining");
+        Enums.ObedienceTraining obedienceTraining =
+            Enums.ObedienceTraining.valueOf(l.toUpperCase());
+        int fee = results.getInt("Fee");
+        l = results.getString("ExerciseNeeds").length() < 1 ? "EMPTY"
+            : results.getString("ExerciseNeeds");
+        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(l.toUpperCase());
+        l = results.getString("EnergyLevel").length() < 1 ? "EMPTY"
+            : results.getString("EnergyLevel");
+        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(l.toUpperCase());
+        l = results.getString("ActivityLevel").length() < 1 ? "EMPTY"
+            : results.getString("ActivityLevel");
+        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(l.toUpperCase());
+        l = results.getString("GroomingNeeds").length() < 1 ? "EMPTY"
+            : results.getString("GroomingNeeds");
+        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(l.toUpperCase());
+        l = results.getString("Shedding").length() < 1 ? "EMPTY" : results.getString("Shedding");
+        Enums.Shedding shedding = Enums.Shedding.valueOf(l.toUpperCase());
+        Boolean goofy = results.getBoolean("Goofy");
+        Boolean hypoallergenic = results.getBoolean("Hypoallergenic");
+        Boolean carTrained = results.getBoolean("CarTrained");
+        Boolean leashTrained = results.getBoolean("LeashTrained");
+        Boolean likesToFetch = results.getBoolean("LikesToFetch");
+        Boolean likesToys = results.getBoolean("LikesToys");
+        Boolean likesSwimming = results.getBoolean("LikesSwimming");
+        Boolean likesLaps = results.getBoolean("LikesLaps");
+        Boolean apartment = results.getBoolean("Apartment");
+        Boolean protective = results.getBoolean("Protective");
+        Boolean obedient = results.getBoolean("Obedient");
+        Boolean playful = results.getBoolean("Playful");
+        Boolean timidShy = results.getBoolean("TimidShy");
+        Boolean independent = results.getBoolean("Independent");
+        Boolean affectionate = results.getBoolean("Affectionate");
+        Boolean eagerToPlease = results.getBoolean("EagerToPlease");
+        Boolean evenTempered = results.getBoolean("EvenTempered");
+        Boolean gentle = results.getBoolean("Gentle");
+        PetProfiles profile =
+            new PetProfiles(profileId, species, sex, breed, age, size, houseTrained, coatLength,
+                location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
+                okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
+                upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
+                groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
+                likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
+                playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
         profiles.add(profile);
       }
     } catch (SQLException e) {
@@ -154,55 +215,111 @@ public class PetProfilesDao extends AbstractDao {
   }
 
   /*
-What animals match a given user's simple preferences?
-*/
+   * What animals match a given user's simple preferences?
+   */
   public List<PetProfiles> matchPetsToSimplePrefs(Users user) throws SQLException {
     List<PetProfiles> profiles = new ArrayList<>();
-    String petsQuery = "SELECT *, \n"+
-        "\t(IF(PetProfiles.ShelteredLonger=UserPrefs.ShelteredLonger  OR UserPrefs.ShelteredLonger IS NULL, 1, 0)\n"+
-        "\t\t+ IF(PetProfiles.Age=UserPrefs.Age OR UserPrefs.Sex IS NULL, 1, 0)\n"+
-        "\t\t+ IF(PetProfiles.Size=UserPrefs.Size OR UserPrefs.Size IS NULL, 1, 0)\n"+
-        "\t\t+ IF(PetProfiles.CoatLength=UserPrefs.CoatLength \n"+
-        "OR UserPrefs.CoatLength IS NULL, 1, 0)\n"+
-        "\t\t+ IF((UserPrefs.HasMedia='Yes'\n"+
-        "\t\t\tAND (PetProfiles.PicturesId IS NOT NULL \n"+
-        "OR PetProfiles.VideosId IS NOT NULL)) \n"+
-        "\t\t\tOR UserPrefs.HasMedia IS NULL, 1, 0)) as MatchScore\n"+
-        "\tFROM PetProfiles INNER JOIN \n"+
-        "    (SELECT * FROM SimplePreferences WHERE UserId=?) as UserPrefs\n"+
-        "    ON (PetProfiles.Species=UserPrefs.Species OR UserPrefs.Species IS NULL)\n"+
-        "\t\tAND (PetProfiles.Sex=UserPrefs.Sex OR UserPrefs.Sex IS NULL)\n"+
-        "\t\tAND (PetProfiles.HouseTrained=UserPrefs.HouseTrained OR UserPrefs.HouseTrained IS NULL)\n"+
-        "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', UserPrefs.Breed, '%') \n"+
-        "\t\t\t\tOR UserPrefs.Breed IS NULL)\n"+
-        "\t\tAND ((PetProfiles.Location - UserPrefs.Location) BETWEEN -5 AND 5\n"+
-        "\t\t\tOR UserPrefs.Location IS NULL)\n"+
-        "\tORDER BY MatchScore DESC;";
+    String petsQuery = "SELECT *, \n"
+        + "\t(IF(PetProfiles.Species=User2Prefs.Species  OR User2Prefs.Species IS NULL, 1, 0)\n"
+        + "\t\t+ IF(PetProfiles.Age=User2Prefs.Age OR User2Prefs.Sex IS NULL, 1, 0)\n"
+        + "\t\t+ IF(PetProfiles.Size=User2Prefs.Size OR User2Prefs.Size IS NULL, 1, 0)\n"
+        + "\t\t+ IF(PetProfiles.CoatLength=User2Prefs.CoatLength \n"
+        + "OR User2Prefs.CoatLength IS NULL, 1, 0)\n" + "\t\t+ IF((User2Prefs.HasMedia='Yes'\n"
+        + "\t\t\tAND (PetProfiles.PicturesId IS NOT NULL \n"
+        + "OR PetProfiles.VideosId IS NOT NULL)) \n"
+        + "\t\t\tOR User2Prefs.HasMedia IS NULL, 1, 0)) as MatchScore\n"
+        + "\tFROM PetProfiles INNER JOIN \n"
+        + "    (SELECT * FROM SimplePreferences WHERE UserId=?) as User2Prefs\n"
+        + "    ON (PetProfiles.Species=User2Prefs.Species OR User2Prefs.Species IS NULL)\n"
+        + "\t\tAND (PetProfiles.Sex=User2Prefs.Sex OR User2Prefs.Sex IS NULL)\n"
+        + "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', User2Prefs.Breed, '%') \n"
+        + "\t\t\t\tOR User2Prefs.Breed IS NULL)\n"
+        + "\t\tAND ((PetProfiles.Location - User2Prefs.Location) BETWEEN -5 AND 5\n"
+        + "\t\t\tOR User2Prefs.Location IS NULL)\n" + "\tORDER BY MatchScore DESC;";
     Connection connection = null;
     PreparedStatement queryStmt = null;
     ResultSet results = null;
     try {
-      connection = connectionManager.getConnection();
+      connection = this.connectionManager.getConnection();
       queryStmt = connection.prepareStatement(petsQuery);
       queryStmt.setInt(1, user.getUserId());
       results = queryStmt.executeQuery();
 
       while (results.next()) {
         int profileId = results.getInt("PetProfileId");
-        Enums.Species species = Enums.Species.valueOf(parseValue(results, "Species"));
-        Enums.Sex sex = Enums.Sex.valueOf(parseValue(results, "Sex"));
+        Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
+        Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
         String breed = results.getString("Breed");
-        Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
-        Enums.Size size = Enums.Size.valueOf(parseValue(results,"Size"));
+        Enums.Age age = Enums.Age.valueOf(results.getString("Age").toUpperCase());
+        Enums.Size size = Enums.Size.valueOf(results.getString("Size").toUpperCase());
         boolean housetrained = results.getBoolean("HouseTrained");
-        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
+
+        /* This is weird but the fastest way I could make it work */
+        String l = results.getString("CoatLength").length() < 1 ? "EMPTY"
+            : results.getString("CoatLength");
+        Enums.CoatLength coatLength = Enums.CoatLength.valueOf(l.toUpperCase());
+
         int location = results.getInt("Location");
         boolean shelteredLonger = results.getBoolean("ShelteredLonger");
         int picturesId = results.getInt("PicturesId");
         int videosId = results.getInt("VideosId");
         int shelterProfileId = results.getInt("ShelterProfileId");
-        PetProfiles profile = new PetProfiles(profileId, species, sex, breed, age, size, housetrained,
-            coatLength, location, shelteredLonger, picturesId, videosId, shelterProfileId);
+        boolean okWithKids = results.getBoolean("OkWithKids");
+        boolean okWithDogs = results.getBoolean("OkWithDogs");
+        boolean okWithCats = results.getBoolean("OkWithCats");
+        boolean okWithAdults = results.getBoolean("OkWithAdults");
+        boolean okWithFarm = results.getBoolean("OkWithFarm");
+        boolean goodWithSeniors = results.getBoolean("GoodWithSeniors");
+        boolean declawed = results.getBoolean("Declawed");
+        String color = results.getString("Color");
+        boolean upToDate = results.getBoolean("UpToDate");
+        l = results.getString("ObedienceTraining").length() < 1 ? "EMPTY"
+            : results.getString("ObedienceTraining");
+        Enums.ObedienceTraining obedienceTraining =
+            Enums.ObedienceTraining.valueOf(l.toUpperCase());
+        int fee = results.getInt("Fee");
+        l = results.getString("ExerciseNeeds").length() < 1 ? "EMPTY"
+            : results.getString("ExerciseNeeds");
+        Enums.ExerciseNeeds exerciseNeeds = Enums.ExerciseNeeds.valueOf(l.toUpperCase());
+        l = results.getString("EnergyLevel").length() < 1 ? "EMPTY"
+            : results.getString("EnergyLevel");
+        Enums.EnergyLevel energyLevel = Enums.EnergyLevel.valueOf(l.toUpperCase());
+        l = results.getString("ActivityLevel").length() < 1 ? "EMPTY"
+            : results.getString("ActivityLevel");
+        Enums.ActivityLevel activityLevel = Enums.ActivityLevel.valueOf(l.toUpperCase());
+        l = results.getString("GroomingNeeds").length() < 1 ? "EMPTY"
+            : results.getString("GroomingNeeds");
+        Enums.GroomingNeeds groomingNeeds = Enums.GroomingNeeds.valueOf(l.toUpperCase());
+        l = results.getString("Shedding").length() < 1 ? "EMPTY" : results.getString("Shedding");
+        Enums.Shedding shedding = Enums.Shedding.valueOf(l.toUpperCase());
+
+        boolean goofy = results.getBoolean("Goofy");
+        boolean hypoallergenic = results.getBoolean("Hypoallergenic");
+        boolean carTrained = results.getBoolean("CarTrained");
+        boolean leashTrained = results.getBoolean("LeashTrained");
+        boolean likesToFetch = results.getBoolean("LikesToFetch");
+        boolean likesToys = results.getBoolean("LikesToys");
+        boolean likesSwimming = results.getBoolean("LikesSwimming");
+        boolean likesLaps = results.getBoolean("LikesLaps");
+        boolean apartment = results.getBoolean("Apartment");
+        boolean protective = results.getBoolean("Protective");
+        boolean obedient = results.getBoolean("Obedient");
+        boolean timidShy = results.getBoolean("TimidShy");
+        boolean playful = results.getBoolean("Playful");
+        boolean independent = results.getBoolean("Independent");
+        boolean affectionate = results.getBoolean("Affectionate");
+        boolean eagerToPlease = results.getBoolean("EagerToPlease");
+        boolean evenTempered = results.getBoolean("EvenTempered");
+        boolean gentle = results.getBoolean("Gentle");
+
+        PetProfiles profile =
+            new PetProfiles(profileId, species, sex, breed, age, size, housetrained, coatLength,
+                location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
+                okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
+                upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
+                groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
+                likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
+                playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
         profiles.add(profile);
       }
     } catch (SQLException e) {

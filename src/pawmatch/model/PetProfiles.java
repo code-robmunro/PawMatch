@@ -1,4 +1,5 @@
 package pawmatch.model;
+
 import pawmatch.model.Enums.*;
 
 /**
@@ -19,11 +20,54 @@ public class PetProfiles {
   private Integer picturesId;
   private Integer videosId;
   private Integer shelterProfileId;
+  private Boolean okWithKids;
+  private Boolean okWithDogs;
+  private Boolean okWithCats;
+  private Boolean okWithAdults;
+  private Boolean okWithFarm;
+  private Boolean goodWithSeniors;
+  private Boolean declawed;
+  private String color;
+  private Boolean upToDate;
+  private ObedienceTraining obedienceTraining;
+  private Integer fee;
+  private ExerciseNeeds exerciseNeeds;
+  private EnergyLevel energyLevel;
+  private ActivityLevel activityLevel;
+  private GroomingNeeds groomingNeeds;
+  private Shedding shedding;
+  private Boolean goofy;
+  private Boolean hypoallergenic;
+  private Boolean carTrained;
+  private Boolean leashTrained;
+  private Boolean likesToFetch;
+  private Boolean likesToys;
+  private Boolean likesSwimming;
+  private Boolean likesLaps;
+  private Boolean apartment;
+  private Boolean protective;
+  private Boolean obedient;
+  private Boolean playful;
+  private Boolean timidShy;
+  private Boolean independent;
+  private Boolean affectionate;
+  private Boolean eagerToPlease;
+  private Boolean evenTempered;
+  private Boolean gentle;
 
-  // Constructor with petProfileId
-  public PetProfiles(Integer petProfileId, Species species, Sex sex, String breed, Age age, Size
-      size, Boolean houseTrained, CoatLength coatLength, Integer location, Boolean
-      shelteredLonger, Integer picturesId, Integer videosId, Integer shelterProfileId) {
+  // Constructor with PetProfileId
+  public PetProfiles(Integer petProfileId, Species species, Sex sex, String breed, Age age,
+      Size size, Boolean houseTrained, CoatLength coatLength, Integer location,
+      Boolean shelteredLonger, Integer picturesId, Integer videosId, Integer shelterProfileId,
+      Boolean okWithKids, Boolean okWithDogs, Boolean okWithCats, Boolean okWithAdults,
+      Boolean okWithFarm, Boolean goodWithSeniors, Boolean declawed, String color, Boolean upToDate,
+      ObedienceTraining obedienceTraining, Integer fee, ExerciseNeeds exerciseNeeds,
+      EnergyLevel energyLevel, ActivityLevel activityLevel, GroomingNeeds groomingNeeds,
+      Shedding shedding, Boolean goofy, Boolean hypoallergenic, Boolean carTrained,
+      Boolean leashTrained, Boolean likesToFetch, Boolean likesToys, Boolean likesSwimming,
+      Boolean likesLaps, Boolean apartment, Boolean protective, Boolean obedient, Boolean playful,
+      Boolean timidShy, Boolean independent, Boolean affectionate, Boolean eagerToPlease,
+      Boolean evenTempered, Boolean gentle) {
     this.petProfileId = petProfileId;
     this.species = species;
     this.sex = sex;
@@ -37,12 +81,55 @@ public class PetProfiles {
     this.picturesId = picturesId;
     this.videosId = videosId;
     this.shelterProfileId = shelterProfileId;
+    this.okWithKids = okWithKids;
+    this.okWithDogs = okWithDogs;
+    this.okWithCats = okWithCats;
+    this.okWithAdults = okWithAdults;
+    this.okWithFarm = okWithFarm;
+    this.goodWithSeniors = goodWithSeniors;
+    this.declawed = declawed;
+    this.color = color;
+    this.upToDate = upToDate;
+    this.obedienceTraining = obedienceTraining;
+    this.fee = fee;
+    this.exerciseNeeds = exerciseNeeds;
+    this.energyLevel = energyLevel;
+    this.activityLevel = activityLevel;
+    this.groomingNeeds = groomingNeeds;
+    this.shedding = shedding;
+    this.goofy = goofy;
+    this.hypoallergenic = hypoallergenic;
+    this.carTrained = carTrained;
+    this.leashTrained = leashTrained;
+    this.likesToFetch = likesToFetch;
+    this.likesToys = likesToys;
+    this.likesSwimming = likesSwimming;
+    this.likesLaps = likesLaps;
+    this.apartment = apartment;
+    this.protective = protective;
+    this.obedient = obedient;
+    this.playful = playful;
+    this.timidShy = timidShy;
+    this.independent = independent;
+    this.affectionate = affectionate;
+    this.eagerToPlease = eagerToPlease;
+    this.evenTempered = evenTempered;
+    this.gentle = gentle;
   }
 
-  // Constructor without shelterProfileId
-  public PetProfiles(Species species, Sex sex, String breed, Age age, Size size, Boolean
-      houseTrained, CoatLength coatLength, Integer location, Boolean shelteredLonger, Integer
-      picturesId, Integer videosId, Integer shelterProfileId) {
+  // Constructor without PetProfileId
+  public PetProfiles(Species species, Sex sex, String breed, Age age, Size size,
+      Boolean houseTrained, CoatLength coatLength, Integer location, Boolean shelteredLonger,
+      Integer picturesId, Integer videosId, Integer shelterProfileId, Boolean okWithKids,
+      Boolean okWithDogs, Boolean okWithCats, Boolean okWithAdults, Boolean okWithFarm,
+      Boolean goodWithSeniors, Boolean declawed, String color, Boolean upToDate,
+      ObedienceTraining obedienceTraining, Integer fee, ExerciseNeeds exerciseNeeds,
+      EnergyLevel energyLevel, ActivityLevel activityLevel, GroomingNeeds groomingNeeds,
+      Shedding shedding, Boolean goofy, Boolean hypoallergenic, Boolean carTrained,
+      Boolean leashTrained, Boolean likesToFetch, Boolean likesToys, Boolean likesSwimming,
+      Boolean likesLaps, Boolean apartment, Boolean protective, Boolean obedient, Boolean playful,
+      Boolean timidShy, Boolean independent, Boolean affectionate, Boolean eagerToPlease,
+      Boolean evenTempered, Boolean gentle) {
     this.species = species;
     this.sex = sex;
     this.breed = breed;
@@ -55,10 +142,44 @@ public class PetProfiles {
     this.picturesId = picturesId;
     this.videosId = videosId;
     this.shelterProfileId = shelterProfileId;
+    this.okWithKids = okWithKids;
+    this.okWithDogs = okWithDogs;
+    this.okWithCats = okWithCats;
+    this.okWithAdults = okWithAdults;
+    this.okWithFarm = okWithFarm;
+    this.goodWithSeniors = goodWithSeniors;
+    this.declawed = declawed;
+    this.color = color;
+    this.upToDate = upToDate;
+    this.obedienceTraining = obedienceTraining;
+    this.fee = fee;
+    this.exerciseNeeds = exerciseNeeds;
+    this.energyLevel = energyLevel;
+    this.activityLevel = activityLevel;
+    this.groomingNeeds = groomingNeeds;
+    this.shedding = shedding;
+    this.goofy = goofy;
+    this.hypoallergenic = hypoallergenic;
+    this.carTrained = carTrained;
+    this.leashTrained = leashTrained;
+    this.likesToFetch = likesToFetch;
+    this.likesToys = likesToys;
+    this.likesSwimming = likesSwimming;
+    this.likesLaps = likesLaps;
+    this.apartment = apartment;
+    this.protective = protective;
+    this.obedient = obedient;
+    this.playful = playful;
+    this.timidShy = timidShy;
+    this.independent = independent;
+    this.affectionate = affectionate;
+    this.eagerToPlease = eagerToPlease;
+    this.evenTempered = evenTempered;
+    this.gentle = gentle;
   }
 
   public Integer getPetProfileId() {
-    return petProfileId;
+    return this.petProfileId;
   }
 
   public void setPetProfileId(Integer petProfileId) {
@@ -66,7 +187,7 @@ public class PetProfiles {
   }
 
   public Species getSpecies() {
-    return species;
+    return this.species;
   }
 
   public void setSpecies(Species species) {
@@ -74,7 +195,7 @@ public class PetProfiles {
   }
 
   public Sex getSex() {
-    return sex;
+    return this.sex;
   }
 
   public void setSex(Sex sex) {
@@ -82,7 +203,7 @@ public class PetProfiles {
   }
 
   public String getBreed() {
-    return breed;
+    return this.breed;
   }
 
   public void setBreed(String breed) {
@@ -90,7 +211,7 @@ public class PetProfiles {
   }
 
   public Age getAge() {
-    return age;
+    return this.age;
   }
 
   public void setAge(Age age) {
@@ -98,7 +219,7 @@ public class PetProfiles {
   }
 
   public Size getSize() {
-    return size;
+    return this.size;
   }
 
   public void setSize(Size size) {
@@ -106,7 +227,7 @@ public class PetProfiles {
   }
 
   public Boolean getHouseTrained() {
-    return houseTrained;
+    return this.houseTrained;
   }
 
   public void setHouseTrained(Boolean houseTrained) {
@@ -114,7 +235,7 @@ public class PetProfiles {
   }
 
   public CoatLength getCoatLength() {
-    return coatLength;
+    return this.coatLength;
   }
 
   public void setCoatLength(CoatLength coatLength) {
@@ -122,7 +243,7 @@ public class PetProfiles {
   }
 
   public Integer getLocation() {
-    return location;
+    return this.location;
   }
 
   public void setLocation(Integer location) {
@@ -130,7 +251,7 @@ public class PetProfiles {
   }
 
   public Boolean getShelteredLonger() {
-    return shelteredLonger;
+    return this.shelteredLonger;
   }
 
   public void setShelteredLonger(Boolean shelteredLonger) {
@@ -138,7 +259,7 @@ public class PetProfiles {
   }
 
   public Integer getPicturesId() {
-    return picturesId;
+    return this.picturesId;
   }
 
   public void setPicturesId(Integer picturesId) {
@@ -146,7 +267,7 @@ public class PetProfiles {
   }
 
   public Integer getVideosId() {
-    return videosId;
+    return this.videosId;
   }
 
   public void setVideosId(Integer videosId) {
@@ -154,29 +275,283 @@ public class PetProfiles {
   }
 
   public Integer getShelterProfileId() {
-    return shelterProfileId;
+    return this.shelterProfileId;
   }
 
   public void setShelterProfileId(Integer shelterProfileId) {
     this.shelterProfileId = shelterProfileId;
   }
 
-  @Override
-  public String toString() {
-    return "PetProfiles{" +
-        "petProfileId=" + petProfileId +
-        ", species=" + species +
-        ", sex=" + sex +
-        ", breed='" + breed + '\'' +
-        ", age=" + age +
-        ", size=" + size +
-        ", houseTrained=" + houseTrained +
-        ", coatLength=" + coatLength +
-        ", location=" + location +
-        ", shelteredLonger=" + shelteredLonger +
-        ", picturesId=" + picturesId +
-        ", videosId=" + videosId +
-        ", shelterProfileId=" + shelterProfileId +
-        '}';
+  public Boolean getOkWithKids() {
+    return this.okWithKids;
   }
+
+  public void setOkWithKids(Boolean okWithKids) {
+    this.okWithKids = okWithKids;
+  }
+
+  public Boolean getOkWithDogs() {
+    return this.okWithDogs;
+  }
+
+  public void setOkWithDogs(Boolean okWithDogs) {
+    this.okWithDogs = okWithDogs;
+  }
+
+  public Boolean getOkWithCats() {
+    return this.okWithCats;
+  }
+
+  public void setOkWithCats(Boolean okWithCats) {
+    this.okWithCats = okWithCats;
+  }
+
+  public Boolean getOkWithAdults() {
+    return this.okWithAdults;
+  }
+
+  public void setOkWithAdults(Boolean okWithAdults) {
+    this.okWithAdults = okWithAdults;
+  }
+
+  public Boolean getOkWithFarm() {
+    return this.okWithFarm;
+  }
+
+  public void setOkWithFarm(Boolean okWithFarm) {
+    this.okWithFarm = okWithFarm;
+  }
+
+  public Boolean getGoodWithSeniors() {
+    return this.goodWithSeniors;
+  }
+
+  public void setGoodWithSeniors(Boolean goodWithSeniors) {
+    this.goodWithSeniors = goodWithSeniors;
+  }
+
+  public Boolean getDeclawed() {
+    return this.declawed;
+  }
+
+  public void setDeclawed(Boolean declawed) {
+    this.declawed = declawed;
+  }
+
+  public String getColor() {
+    return this.color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  public Boolean getUpToDate() {
+    return this.upToDate;
+  }
+
+  public void setUpToDate(Boolean upToDate) {
+    this.upToDate = upToDate;
+  }
+
+  public ObedienceTraining getObedienceTraining() {
+    return this.obedienceTraining;
+  }
+
+  public void setObedienceTraining(ObedienceTraining obedienceTraining) {
+    this.obedienceTraining = obedienceTraining;
+  }
+
+  public Integer getFee() {
+    return this.fee;
+  }
+
+  public void setFee(Integer fee) {
+    this.fee = fee;
+  }
+
+  public ExerciseNeeds getExerciseNeeds() {
+    return this.exerciseNeeds;
+  }
+
+  public void setExerciseNeeds(ExerciseNeeds exerciseNeeds) {
+    this.exerciseNeeds = exerciseNeeds;
+  }
+
+  public EnergyLevel getEnergyLevel() {
+    return this.energyLevel;
+  }
+
+  public void setEnergyLevel(EnergyLevel energyLevel) {
+    this.energyLevel = energyLevel;
+  }
+
+  public ActivityLevel getActivityLevel() {
+    return this.activityLevel;
+  }
+
+  public void setActivityLevel(ActivityLevel activityLevel) {
+    this.activityLevel = activityLevel;
+  }
+
+  public GroomingNeeds getGroomingNeeds() {
+    return this.groomingNeeds;
+  }
+
+  public void setGroomingNeeds(GroomingNeeds groomingNeeds) {
+    this.groomingNeeds = groomingNeeds;
+  }
+
+  public Shedding getShedding() {
+    return this.shedding;
+  }
+
+  public void setShedding(Shedding shedding) {
+    this.shedding = shedding;
+  }
+
+  public Boolean getGoofy() {
+    return this.goofy;
+  }
+
+  public void setGoofy(Boolean goofy) {
+    this.goofy = goofy;
+  }
+
+  public Boolean getHypoallergenic() {
+    return this.hypoallergenic;
+  }
+
+  public void setHypoallergenic(Boolean hypoallergenic) {
+    this.hypoallergenic = hypoallergenic;
+  }
+
+  public Boolean getCarTrained() {
+    return this.carTrained;
+  }
+
+  public void setCarTrained(Boolean carTrained) {
+    this.carTrained = carTrained;
+  }
+
+  public Boolean getLeashTrained() {
+    return this.leashTrained;
+  }
+
+  public void setLeashTrained(Boolean leashTrained) {
+    this.leashTrained = leashTrained;
+  }
+
+  public Boolean getLikesToFetch() {
+    return this.likesToFetch;
+  }
+
+  public void setLikesToFetch(Boolean likesToFetch) {
+    this.likesToFetch = likesToFetch;
+  }
+
+  public Boolean getLikesToys() {
+    return this.likesToys;
+  }
+
+  public void setLikesToys(Boolean likesToys) {
+    this.likesToys = likesToys;
+  }
+
+  public Boolean getLikesSwimming() {
+    return this.likesSwimming;
+  }
+
+  public void setLikesSwimming(Boolean likesSwimming) {
+    this.likesSwimming = likesSwimming;
+  }
+
+  public Boolean getLikesLaps() {
+    return this.likesLaps;
+  }
+
+  public void setLikesLaps(Boolean likesLaps) {
+    this.likesLaps = likesLaps;
+  }
+
+  public Boolean getApartment() {
+    return this.apartment;
+  }
+
+  public void setApartment(Boolean apartment) {
+    this.apartment = apartment;
+  }
+
+  public Boolean getProtective() {
+    return this.protective;
+  }
+
+  public void setProtective(Boolean protective) {
+    this.protective = protective;
+  }
+
+  public Boolean getObedient() {
+    return this.obedient;
+  }
+
+  public void setObedient(Boolean obedient) {
+    this.obedient = obedient;
+  }
+
+  public Boolean getPlayful() {
+    return this.playful;
+  }
+
+  public void setPlayful(Boolean playful) {
+    this.playful = playful;
+  }
+
+  public Boolean getTimidShy() {
+    return this.timidShy;
+  }
+
+  public void setTimidShy(Boolean timidShy) {
+    this.timidShy = timidShy;
+  }
+
+  public Boolean getIndependent() {
+    return this.independent;
+  }
+
+  public void setIndependent(Boolean independent) {
+    this.independent = independent;
+  }
+
+  public Boolean getAffectionate() {
+    return this.affectionate;
+  }
+
+  public void setAffectionate(Boolean affectionate) {
+    this.affectionate = affectionate;
+  }
+
+  public Boolean getEagerToPlease() {
+    return this.eagerToPlease;
+  }
+
+  public void setEagerToPlease(Boolean eagerToPlease) {
+    this.eagerToPlease = eagerToPlease;
+  }
+
+  public Boolean getEvenTempered() {
+    return this.evenTempered;
+  }
+
+  public void setEvenTempered(Boolean evenTempered) {
+    this.evenTempered = evenTempered;
+  }
+
+  public Boolean getGentle() {
+    return this.gentle;
+  }
+
+  public void setGentle(Boolean gentle) {
+    this.gentle = gentle;
+  }
+
 }
