@@ -149,7 +149,7 @@ public class UsersDao {
 
   public List<Users> getAllUsers() throws SQLException {
     List<Users> allUsers = new ArrayList<Users>();
-    String selectCards = "SELECT * FROM Users;";
+    String selectCards = "SELECT * FROM Users LIMIT 100;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;

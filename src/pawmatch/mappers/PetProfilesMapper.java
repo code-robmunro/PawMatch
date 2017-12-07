@@ -15,7 +15,7 @@ public class PetProfilesMapper extends AbstractMapper {
 
     int profileId = results.getInt("PetProfileId");
     Enums.Species species = Enums.Species.valueOf(results.getString("Species").toUpperCase());
-    Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
+    Enums.Sex sex = Enums.Sex.lookup(results.getString("Sex").toUpperCase(), Enums.Sex.EMPTY);
     String breed = results.getString("Breed");
     Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
     Enums.Size size = Enums.Size.lookup(results.getString("Size").toUpperCase(), Enums.Size.EMPTY);

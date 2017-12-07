@@ -30,6 +30,14 @@ public class Enums {
     public String toString(){
       return this.code;
     }
+
+    static public Sex lookup(String id, Sex defaultValue) {
+      try {
+        return Sex.valueOf(id);
+      } catch (IllegalArgumentException ex) {
+        return defaultValue;
+      }
+    }
   }
 
   public enum Age{

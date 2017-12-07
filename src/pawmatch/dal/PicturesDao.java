@@ -93,7 +93,7 @@ public class PicturesDao {
 
   public Pictures getPictureById(int pictureId) throws SQLException {
     String selectPictureById =
-        "SELECT * FROM Pictures WHERE pictureId=?;";
+        "SELECT * FROM Pictures WHERE pictureId=? LIMIT 0,1;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;

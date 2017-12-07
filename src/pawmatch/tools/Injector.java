@@ -65,7 +65,7 @@ public class Injector {
     user1 = usersDao.create(user1);
 
     /* Read */
-    List<PetProfiles> profilesList = petProfilesDao.searchPetsByLocation(98122);
+    List<PetProfiles> profilesList = petProfilesDao.searchPetsByLocation("98122");
 //    for(PetProfiles p : profilesList)
 //      System.out.println(p.getPetProfileId());
 

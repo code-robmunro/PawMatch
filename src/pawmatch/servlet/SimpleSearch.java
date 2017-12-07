@@ -2,6 +2,7 @@ package pawmatch.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import pawmatch.dal.PetProfilesDao;
+import pawmatch.dal.PicturesDao;
 import pawmatch.dal.UsersDao;
 import pawmatch.model.PetProfiles;
 
@@ -22,11 +24,13 @@ public class SimpleSearch extends HttpServlet {
 
 	protected PetProfilesDao petProfilesDao;
 	protected UsersDao usersDao;
+	protected PicturesDao picturesDao;
 
 	@Override
 	public void init() throws ServletException {
 		petProfilesDao = PetProfilesDao.getInstance();
 		usersDao = UsersDao.getInstance();
+		picturesDao = PicturesDao.getInstance();
 	}
 
 	@Override
@@ -37,6 +41,8 @@ public class SimpleSearch extends HttpServlet {
 		req.setAttribute("messages", messages);
 
 		List<PetProfiles> profiles = null;
+		List<String> thumbs = new ArrayList<>();
+		List<String> full = new ArrayList<>();
 
 		String userId = req.getParameter("userid");
 		if (userId == null || userId.trim().isEmpty()) {
@@ -44,6 +50,10 @@ public class SimpleSearch extends HttpServlet {
 		} else {
 			try {
 				profiles = petProfilesDao.matchPetsToSimplePrefs(usersDao.getUserById(Integer.parseInt(userId)));
+				for (PetProfiles pet : profiles) {
+					thumbs.add(picturesDao.getPictureById(pet.getPetProfileId()).getThumbnailImageUrl());
+					full.add(picturesDao.getPictureById(pet.getPetProfileId()).getFullImageUrl());
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
@@ -53,6 +63,8 @@ public class SimpleSearch extends HttpServlet {
 			// in the input box when rendering FindUsers.jsp.
 			messages.put("previous user ID", userId.toString());
 		}
+		req.setAttribute("thumbs_img", thumbs);
+		req.setAttribute("full_img", full);
 		req.setAttribute("profiles", profiles);
 
 		req.getRequestDispatcher("/SimpleSearch.jsp").forward(req, resp);
@@ -66,6 +78,8 @@ public class SimpleSearch extends HttpServlet {
 		req.setAttribute("messages", messages);
 
 		List<PetProfiles> profiles = null;
+		List<String> thumbs = new ArrayList<>();
+		List<String> full = new ArrayList<>();
 
 		String userId = req.getParameter("userid");
 		if (userId == null || userId.trim().isEmpty()) {
@@ -73,6 +87,10 @@ public class SimpleSearch extends HttpServlet {
 		} else {
 			try {
 				profiles = petProfilesDao.matchPetsToSimplePrefs(usersDao.getUserById(Integer.parseInt(userId)));
+				for (PetProfiles pet : profiles) {
+					thumbs.add(picturesDao.getPictureById(pet.getPetProfileId()).getThumbnailImageUrl());
+					full.add(picturesDao.getPictureById(pet.getPetProfileId()).getFullImageUrl());
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
@@ -82,6 +100,8 @@ public class SimpleSearch extends HttpServlet {
 			// in the input box when rendering FindUsers.jsp.
 			messages.put("previous user ID", userId.toString());
 		}
+		req.setAttribute("thumbs_img", thumbs);
+		req.setAttribute("full_img", full);
 		req.setAttribute("profiles", profiles);
 
 		req.getRequestDispatcher("/SimpleSearch.jsp").forward(req, resp);

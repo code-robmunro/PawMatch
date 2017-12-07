@@ -115,7 +115,7 @@ public class PetProfilesDao {
   /*
    * What animals are located near me?
    */
-  public List<PetProfiles> searchPetsByLocation(int zipcode) throws SQLException {
+  public List<PetProfiles> searchPetsByLocation(String zipcode) throws SQLException {
     List<PetProfiles> profiles = new ArrayList<>();
     String findPets = "SELECT * FROM PetProfiles WHERE Location=?;";
     Connection connection = null;
@@ -124,7 +124,7 @@ public class PetProfilesDao {
     try {
       connection = this.connectionManager.getConnection();
       queryStmt = connection.prepareStatement(findPets);
-      queryStmt.setInt(1, zipcode);
+      queryStmt.setString(1, zipcode);
       results = queryStmt.executeQuery();
 
       while (results.next()) {
@@ -149,17 +149,16 @@ public class PetProfilesDao {
   }
 
   /*
-   * What animals match a given user's simple preferences?
+   * What animals match a given pet's simple preferences?
    */
   public List<PetProfiles> matchPetsToSimplePrefs(Users user) throws SQLException {
     List<PetProfiles> profiles = new ArrayList<>();
-    String petsQuery = SIMPLE_PETS_QUERY;
     Connection connection = null;
     PreparedStatement queryStmt = null;
     ResultSet results = null;
     try {
       connection = this.connectionManager.getConnection();
-      queryStmt = connection.prepareStatement(petsQuery);
+      queryStmt = connection.prepareStatement(SIMPLE_PETS_QUERY);
       queryStmt.setInt(1, user.getUserId());
       results = queryStmt.executeQuery();
 
@@ -218,6 +217,75 @@ public class PetProfilesDao {
     return profiles;
   }
 
+  public List<PetProfiles> getAllPets() throws SQLException {
+    List<PetProfiles> profiles = new ArrayList<>();
+    String selectCards = "SELECT * FROM PetProfiles LIMIT 100;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectCards);
+      // Note that we call executeQuery(). This is used for a SELECT statement
+      // because it returns a result set. For more information, see:
+      // http://docs.oracle.com/javase/7/docs/api/java/sql/PreparedStatement.html
+      // http://docs.oracle.com/javase/7/docs/api/java/sql/ResultSet.html
+      results = selectStmt.executeQuery();
+      // You can iterate the result set (although the example below only retrieves
+      // the first record). The cursor is initially positioned before the row.
+      // Furthermore, you can retrieve fields by name and by type.
+      while (results.next()) {
+          PetProfiles profile = new PetProfilesMapper().mapRow(results);
+          profiles.add(profile);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if(connection != null) {
+        connection.close();
+      }
+      if(selectStmt != null) {
+        selectStmt.close();
+      }
+      if(results != null) {
+        results.close();
+      }
+    }
+    return profiles;
+  }
+
+  public PetProfiles getPetById(int petId) throws SQLException {
+    String selectPet =
+        "SELECT * FROM PetProfiles WHERE PetProfileId=?;";
+    Connection connection = null;
+    PreparedStatement selectStmt = null;
+    ResultSet results = null;
+    try {
+      connection = connectionManager.getConnection();
+      selectStmt = connection.prepareStatement(selectPet);
+      selectStmt.setInt(1, petId);
+      results = selectStmt.executeQuery();
+      if(results.next()) {
+        PetProfiles pet = new PetProfilesMapper().mapRow(results);
+        return pet;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw e;
+    } finally {
+      if(connection != null) {
+        connection.close();
+      }
+      if(selectStmt != null) {
+        selectStmt.close();
+      }
+      if(results != null) {
+        results.close();
+      }
+    }
+    return null;
+  }
 
   private static final String SELECT_ALL_FIELDS =
       "SELECT DISTINCT PetProfiles.PetProfileId, PetProfiles.Species, PetProfiles.Sex, " +
@@ -355,5 +423,6 @@ public class PetProfilesDao {
           "\t\tAND ((PetProfiles.Location - SimplePrefs.Location) BETWEEN -5 AND 5\n" +
           "\t\t\tOR SimplePrefs.Location IS NULL)\n" +
           "ORDER BY MatchScore DESC;";
+
 
 }

@@ -32,11 +32,11 @@
 <div style="margin: 0 auto;">
     <div style="margin-left: 20%">
         <h1>${messages.title}</h1>
-        <form action="detailedsearch" method="post">
+        <form action="petlocationsearch" method="post">
             <p>
             <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-                <label for="userid">User ID</label>
-                <input id="userid" name="userid" value="${fn:escapeXml(param.userid)}">
+                <label for="zip">Zip Code</label>
+                <input id="zip" name="zip" value="${fn:escapeXml(param.zip)}">
             </div>
             </p>
             <p>
@@ -87,6 +87,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        </tr>
                         <c:forEach items="${profiles}" var="profile" varStatus="status">
 
                             <tr>
@@ -100,7 +101,8 @@
                                 <td><c:out value="${profile.getCoatLength()}"/></td>
                                 <td><c:out value="${profile.getLocation()}"/></td>
                                 <td><c:out value="${profile.getShelteredLonger()}"/></td>
-                                <td><a href="<c:out value="${full_img[status.index]}"/>"><img src="<c:out value="${thumbs_img[status.index]}"/>"></a></td>
+                                <td><a href="<c:out value="${full_img[status.index]}"/>"><img
+                                        src="<c:out value="${thumbs_img[status.index]}"/>"></a></td>
                             </tr>
 
                         </c:forEach>
