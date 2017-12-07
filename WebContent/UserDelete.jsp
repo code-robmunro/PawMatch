@@ -9,19 +9,20 @@
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Delete a User</title>
+	<title>Re-enter ID to confirm</title>
 </head>
 <body>
 	<h1>${messages.title}</h1>
 	<form action="userdelete" method="post">
 		<p>
 			<div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-				<label for="userid">User ID</label>
-				<input id="userid" name="userid" value="${fn:escapeXml(param.userid)}">
-			</div>
+		<label for="userid">User ID</label>
+		<input id="userid" name="userid" value="${fn:escapeXml(param.userid)}">
+	</div>
 		</p>
 		<p>
-			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
+			<span id="submitButton"
+				  <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
 			<input type="submit">
 			</span>
 		</p>

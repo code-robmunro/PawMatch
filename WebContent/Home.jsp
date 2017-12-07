@@ -73,28 +73,34 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-0 mb-lg-0 mb-lg-0">
+                    <a href="pets" style="text-decoration: none">
                     <div class="features-icons-icon d-flex">
                         <i class="icon-heart m-auto text-primary"></i>
                     </div>
                     <h3>Pets</h3>
+                    </a>
                     <p class="lead mb-0">All of the fluff!</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-0 mb-lg-0 mb-lg-0">
+                    <a href="shelters" style="text-decoration: none">
                     <div class="features-icons-icon d-flex">
                         <i class="icon-home m-auto text-primary"></i>
                     </div>
                     <h3>Shelters</h3>
+                    </a>
                     <p class="lead mb-0">Find your new adoption center!</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="features-icons-item mx-auto mb-0 mb-lg-0">
+                    <a href="users" style="text-decoration: none">
                     <div class="features-icons-icon d-flex">
                         <i class="icon-check m-auto text-primary"></i>
                     </div>
                     <h3>Saved User Search</h3>
+                    </a>
                     <p class="lead mb-0">Come back anytime and start where you left off!</p>
                 </div>
             </div>

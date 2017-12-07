@@ -40,6 +40,18 @@ public class Users {
     Foster = foster;
   }
 
+  public Users(String userName, String firstName, String lastName, String email, String password, Boolean notificationsOn, Boolean foster) {
+    UserName = userName;
+    FirstName = firstName;
+    LastName = lastName;
+    Email = email;
+    Password = password;
+    SimplePreferencesId = null;
+    DetailedPreferencesId = null;
+    NotificationsOn = notificationsOn;
+    Foster = foster;
+  }
+
   public Integer getUserId() {
     return UserId;
   }

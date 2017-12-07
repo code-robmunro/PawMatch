@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pawmatch.dal.CommonApplicationsDao;
 import pawmatch.dal.UsersDao;
-import pawmatch.model.CommonApplications;
 import pawmatch.model.Users;
 
 
@@ -39,34 +37,31 @@ public class UserCreate extends HttpServlet {
 	
 	@Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-    		throws ServletException, IOException {
-        // Map for storing messages.
-        Map<String, String> messages = new HashMap<String, String>();
-        req.setAttribute("messages", messages);
+			throws ServletException, IOException {
+		// Map for storing messages.
+		Map<String, String> messages = new HashMap<String, String>();
+		req.setAttribute("messages", messages);
 
 
-        // Create the User.
-        String userName = req.getParameter("username");
-        String firstName = req.getParameter("firstname");
-        String lastName = req.getParameter("lastname");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        String notifications = req.getParameter("notifications");
-        String foster = req.getParameter("foster");
-        String userId = req.getParameter("userid");
+		// Create the User.
+		String userName = req.getParameter("username");
+		String firstName = req.getParameter("firstname");
+		String lastName = req.getParameter("lastname");
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
+		String notifications = req.getParameter("notifications");
+		String foster = req.getParameter("foster");
 
-	    try {
-	        // Exercise: parse the input for StatusLevel.
-	        Users user = new Users(Integer.parseInt(userId), userName, firstName, lastName, email,
-							password, null, null, Boolean.parseBoolean(notifications),
-							Boolean.parseBoolean(foster));
-	        user = usersDao.create(user);
-	        messages.put("success", "Successfully created user (" + userName + ", UserID: " + userId);
-	    } catch (SQLException e) {
+		try {
+			// Exercise: parse the input for StatusLevel.
+			Users user = new Users(userName, firstName, lastName, email, password, Boolean.parseBoolean(notifications), Boolean.parseBoolean(foster));
+			user = usersDao.create(user);
+			messages.put("success", "Successfully created user " + userName);
+		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
-	    }
+		}
 
-        req.getRequestDispatcher("/UserCreate.jsp").forward(req, resp);
-    }
+		req.getRequestDispatcher("/UserCreate.jsp").forward(req, resp);
+	}
 }

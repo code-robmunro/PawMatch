@@ -60,11 +60,14 @@ header.masthead {
   .features-icons .features-icons-item {
     max-width: 20rem; }
     .features-icons .features-icons-item .features-icons-icon {
-      height: 4rem; }
+      height: 4rem;
+      float: left }
       .features-icons .features-icons-item .features-icons-icon i {
-        font-size: 4.5rem; }
+        font-size: 4.5rem;
+        float: left }
     .features-icons .features-icons-item:hover .features-icons-icon i {
-      font-size: 5rem; }
+      font-size: 5rem;
+      float: left }
 
 .testimonials {
   padding-top: 7rem;
