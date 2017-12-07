@@ -61,6 +61,8 @@
 <h1>Matching User</h1>
 <table border="1">
     <tr>
+        <th>Simple</th>
+        <th>Detailed</th>
         <th>UserId</th>
         <th>UserName</th>
         <th>FirstName</th>
@@ -71,6 +73,12 @@
         <th>Foster</th>
     </tr>
     <tr>
+        <td align="center">
+            <a href="simplesearch?userid=<c:out value="${user.getUserId()}"/>" class="btn btn-warning"><em class="fa fa-search"></em></a>
+        </td>
+        <td align="center">
+            <a href="detailedsearch?userid=<c:out value="${user.getUserId()}"/>" class="btn btn-success"><em class="fa fa-search"></em></a>
+        </td>
         <td><c:out value="${user.getUserId()}" /></td>
         <td><c:out value="${user.getUserName()}" /></td>
         <td><c:out value="${user.getFirstName()}" /></td>
