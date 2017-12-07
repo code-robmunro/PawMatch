@@ -37,10 +37,11 @@ header.masthead {
     font-size: 2rem; }
   @media (min-width: 768px) {
     header.masthead {
-      padding-top: 12rem;
-      padding-bottom: 12rem; }
+      padding-top: 6rem;
+      padding-bottom: 6rem; }
       header.masthead h1 {
-        font-size: 3rem; } }
+        font-size: 3rem;
+        } }
 
 .showcase .showcase-text {
   padding: 3rem; }
