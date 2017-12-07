@@ -30,3 +30,16 @@ Name, Address, City, State, Zip, Phone, Email, OrgUrl, FacebookUrl, MeetPets, Al
 		(SELECT Name, Address, City, State, Zip, Phone, Email, OrgUrl, FacebookUrl, MeetPets, AllowCommonApp, OrganizationId
         FROM Organizations 
         );
+
+CREATE TABLE temp_HasPics AS 
+	SELECT PetProfiles.PetProfileId, IF(PetProfiles.PetProfileId IS NULL, FALSE, TRUE) as HasPictures
+	FROM PetProfiles LEFT JOIN Pictures ON PetProfiles.PetProfileId=Pictures.PetProfileId
+	GROUP BY PetProfiles.PetProfileId;
+
+SET SQL_SAFE_UPDATES=0;
+
+UPDATE PetProfiles
+INNER JOIN temp_HasPics ON PetProfiles.PetProfileId = temp_HasPics.PetProfileId
+SET PetProfiles.HasPictures = IF(temp_HasPics.HasPictures = 1, 1, 0);
+
+SET SQL_SAFE_UPDATES=1;

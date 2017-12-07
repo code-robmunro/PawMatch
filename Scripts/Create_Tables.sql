@@ -332,7 +332,7 @@ CREATE TABLE PetProfiles (
   EagerToPlease BOOLEAN,
   EvenTempered BOOLEAN,
   Gentle BOOLEAN,
-  ShelterProfileId INTEGER,
+ HasPictures BOOLEAN, ShelterProfileId INTEGER,
   CONSTRAINT pk_PetProfiles_ID PRIMARY KEY (PetProfileId),
   CONSTRAINT fk_PetProfiles_ShelterProfileId
 	FOREIGN KEY (ShelterProfileId)

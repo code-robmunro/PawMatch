@@ -1,11 +1,14 @@
 package pawmatch.dal;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import pawmatch.mappers.PetProfilesMapper;
-import pawmatch.model.Enums;
 import pawmatch.model.PetProfiles;
 import pawmatch.model.Users;
 
@@ -33,13 +36,13 @@ public class PetProfilesDao {
   public PetProfiles create(PetProfiles petProfile) throws SQLException {
     String insertpetProfile =
         "INSERT INTO PetProfiles(Species, Sex, Breed, Age, Size, HouseTrained, CoatLength,"
-            + " Location, ShelteredLonger, PicturesId, VideosId, OKWithDogs, OKWithCats, "
+            + " Location, ShelteredLonger, OKWithDogs, OKWithCats, "
             + "OKWithKids, OKWithAdults, OKWithFarm, GoodWithSeniors, Declawed, Color, UpToDate, "
             + "ObedienceTraining, Fee, ExerciseNeeds, EnergyLevel, ActivityLevel, GroomingNeeds, "
             + "Shedding, Goofy, Hypoallergenic, CarTrained, LeashTrained, LikesToFetch, LikesToys, "
             + "LikesSwimming, LikesLaps, Apartment, Protective, Obedient, Playful, TimidShy, "
-            + "Independent, Affectionate, EagerToPlease, EvenTempered, Gentle, ShelterProfileId) "
-            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
+            + "Independent, Affectionate, EagerToPlease, EvenTempered, Gentle, HasPictures, ShelterProfileId) "
+            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"
             + "?,?,?,?,?,?,?,?);";
     Connection connection = null;
     PreparedStatement insertStmt = null;
@@ -54,11 +57,9 @@ public class PetProfilesDao {
       insertStmt.setString(5, petProfile.getSize().toString());
       insertStmt.setBoolean(6, petProfile.getHouseTrained());
       insertStmt.setString(7, petProfile.getCoatLength().toString());
-      insertStmt.setInt(8, petProfile.getLocation());
+      insertStmt.setString(8, petProfile.getLocation());
       insertStmt.setBoolean(9, petProfile.getShelteredLonger());
-      insertStmt.setInt(10, petProfile.getPicturesId());
-      insertStmt.setInt(11, petProfile.getVideosId());
-      insertStmt.setInt(12, petProfile.getShelterProfileId());
+      insertStmt.setInt(10, petProfile.getShelterProfileId());
       insertStmt.executeUpdate();
 
       // Retrieve the auto-generated key and set it, so it can be used by the caller
@@ -223,7 +224,7 @@ public class PetProfilesDao {
           "PetProfiles.Breed,\n" +
           " \tPetProfiles.Age, PetProfiles.size, PetProfiles.HouseTrained, PetProfiles" +
           ".CoatLength, PetProfiles.Location,\n" +
-          "     PetProfiles.ShelteredLonger, PetProfiles.PicturesId, PetProfiles.VideosId, " +
+          "     PetProfiles.ShelteredLonger, \n" +
           "PetProfiles.OKWithDogs,\n" +
           "     PetProfiles.OKWithCats,  PetProfiles.OKWithKids, PetProfiles.OKWithAdults, " +
           "PetProfiles.OKWithFarm, PetProfiles.GoodWithSeniors,\n" +
@@ -355,4 +356,5 @@ public class PetProfilesDao {
           "\t\tAND ((PetProfiles.Location - SimplePrefs.Location) BETWEEN -5 AND 5\n" +
           "\t\t\tOR SimplePrefs.Location IS NULL)\n" +
           "ORDER BY MatchScore DESC;";
+  
 }

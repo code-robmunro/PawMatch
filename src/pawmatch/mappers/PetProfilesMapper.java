@@ -21,10 +21,8 @@ public class PetProfilesMapper extends AbstractMapper {
     Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
     boolean housetrained = results.getBoolean("HouseTrained");
     Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
-    int location = results.getInt("Location");
+    String location = results.getString("Location");
     boolean shelteredLonger = results.getBoolean("ShelteredLonger");
-    int picturesId = results.getInt("PicturesId");
-    int videosId = results.getInt("VideosId");
     int shelterProfileId = results.getInt("ShelterProfileId");
     boolean okWithKids = results.getBoolean("OKWithKids");
     boolean okWithDogs = results.getBoolean("OKWithDogs");
@@ -64,7 +62,7 @@ public class PetProfilesMapper extends AbstractMapper {
 
     PetProfiles profile =
         new PetProfiles(profileId, species, sex, breed, age, size, housetrained, coatLength,
-            location, shelteredLonger, picturesId, videosId, shelterProfileId, okWithKids,
+            location, shelteredLonger, shelterProfileId, okWithKids,
             okWithDogs, okWithCats, okWithAdults, okWithFarm, goodWithSeniors, declawed, color,
             upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
             groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
