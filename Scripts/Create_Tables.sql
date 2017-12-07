@@ -1,4 +1,4 @@
-﻿CREATE SCHEMA IF NOT EXISTS PawMatch;
+CREATE SCHEMA IF NOT EXISTS PawMatch;
 USE PawMatch;
 
 DROP TABLE IF EXISTS Pictures;
@@ -120,7 +120,7 @@ CREATE TABLE Animals (
   CONSTRAINT pk_Animals_ID PRIMARY KEY (animalID)
 );
 
-LOAD DATA LOCAL INFILE 'C:/Users/Robert/PycharmProjects/jsonextractor/pet_output.csv' INTO TABLE Animals
+LOAD DATA LOCAL INFILE '~/PawMatch/pet_output.csv' INTO TABLE Animals
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\r\n'
 IGNORE 1 LINES;
@@ -150,7 +150,7 @@ CREATE TABLE Organizations (
   CONSTRAINT pk_Organizations_ID PRIMARY KEY (OrganizationId)
 );
 
-LOAD DATA LOCAL INFILE 'D:/Users/Robert/Documents/GitHub/CS5200_DBMS_Cat_Superheroes/Cleaned Data/organizations.csv' INTO TABLE Organizations
+LOAD DATA LOCAL INFILE '~/PawMatch/organizations.csv' INTO TABLE Organizations
 FIELDS TERMINATED BY '\t'
 IGNORE 1 LINES;
 
@@ -171,7 +171,7 @@ CREATE TABLE Users (
 );
 
 
-LOAD DATA LOCAL INFILE 'C:/Users/Robert/PycharmProjects/jsonextractor/users.csv' INTO TABLE Users
+LOAD DATA LOCAL INFILE '~/PawMatch/users.csv' INTO TABLE Users
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\r\n' (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster);
 
@@ -244,10 +244,17 @@ CREATE TABLE DetailedPreferences (
 
 CREATE TABLE Pictures (
   PictureId INTEGER AUTO_INCREMENT,
-  Url TEXT NOT NULL,
-  Caption TEXT,
+  PetProfileId INTEGER,
+  FullImageUrl TEXT,
+  ThumbnailImageUrl TEXT,
   CONSTRAINT pk_Pictures_ID PRIMARY KEY (PictureId)
 );
+
+LOAD DATA LOCAL INFILE '~/PawMatch/full_thumb_formatted.csv'
+INTO TABLE Pictures
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\r\n'
+(PetProfileId, FullImageUrl, ThumbnailImageUrl);
 
 CREATE TABLE Videos (
   VideoId INTEGER AUTO_INCREMENT,
