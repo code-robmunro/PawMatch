@@ -40,8 +40,6 @@
 		<th>CoatLength</th>
 		<th>Location</th>
 		<th>ShelteredLonger</th>
-		<th>PicturesId</th>
-		<th>VideosId</th>
 		 <%--TODO: finish all fields--%>
 	</tr>
 	<c:forEach items="${profiles}" var="profile" >
@@ -56,8 +54,6 @@
 			<td><c:out value="${profile.getCoatLength()}" /></td>
 			<td><c:out value="${profile.getLocation()}" /></td>
 			<td><c:out value="${profile.getShelteredLonger()}" /></td>
-			<td><c:out value="${profile.getPicturesId()}" /></td>
-			<td><c:out value="${profile.getVideosId()}" /></td>
 		</tr>
 	</c:forEach>
 </table>

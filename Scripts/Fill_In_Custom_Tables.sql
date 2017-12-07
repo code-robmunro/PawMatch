@@ -25,6 +25,12 @@ INSERT INTO SimplePreferences(Species, Sex, Breed, Age, Size, HouseTrained, Coat
 	HasMedia, Location, ShelteredLonger, UserId)
 VALUES('Dog', 'Female', 'Labrador', 'Young', null, true, 'Short', true, 94582 , null, 1);
 
+INSERT INTO Users (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster)
+VALUES('user2', 'a', 'b', 'a@b.com', 'asldf', 1, 1, true, false);
+
+INSERT INTO SimplePreferences(Species, UserId)
+VALUES('Dog', 32769);
+
 INSERT INTO ShelterProfiles (
 Name, Address, City, State, Zip, Phone, Email, OrgUrl, FacebookUrl, MeetPets, AllowCommonApp, OrganizationId)
 		(SELECT Name, Address, City, State, Zip, Phone, Email, OrgUrl, FacebookUrl, MeetPets, AllowCommonApp, OrganizationId

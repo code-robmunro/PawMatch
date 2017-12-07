@@ -241,25 +241,24 @@ public class PetProfilesDao {
           "     PetProfiles.Obedient, PetProfiles.Playful, PetProfiles.TimidShy, PetProfiles" +
           ".Independent, PetProfiles.Affectionate,\n" +
           "     PetProfiles.EagerToPlease, PetProfiles.EvenTempered, PetProfiles.Gentle, " +
-          "PetProfiles.ShelterProfileId,\n";
+          "PetProfiles.HasPictures, PetProfiles.ShelterProfileId,\n";
 
   private static final String SIMPLE_PETS_QUERY = SELECT_ALL_FIELDS
-      + "\t(IF(PetProfiles.Species=User2Prefs.Species  OR User2Prefs.Species IS NULL, 1, 0)\n"
-      + "\t\t+ IF(PetProfiles.Age=User2Prefs.Age OR User2Prefs.Sex IS NULL, 1, 0)\n"
-      + "\t\t+ IF(PetProfiles.Size=User2Prefs.Size OR User2Prefs.Size IS NULL, 1, 0)\n"
-      + "\t\t+ IF(PetProfiles.CoatLength=User2Prefs.CoatLength \n"
-      + "OR User2Prefs.CoatLength IS NULL, 1, 0)\n" + "\t\t+ IF((User2Prefs.HasMedia='Yes'\n"
-      + "\t\t\tAND (PetProfiles.PicturesId IS NOT NULL \n"
-      + "OR PetProfiles.VideosId IS NOT NULL)) \n"
-      + "\t\t\tOR User2Prefs.HasMedia IS NULL, 1, 0)) as MatchScore\n"
+      + "\t(IF(PetProfiles.Species=SimplePrefs.Species  OR SimplePrefs.Species IS NULL, 1, 0)\n"
+      + "\t\t+ IF(PetProfiles.Age=SimplePrefs.Age OR SimplePrefs.Sex IS NULL, 1, 0)\n"
+      + "\t\t+ IF(PetProfiles.Size=SimplePrefs.Size OR SimplePrefs.Size IS NULL, 1, 0)\n"
+      + "\t\t+ IF(PetProfiles.CoatLength=SimplePrefs.CoatLength \n"
+      + "OR SimplePrefs.CoatLength IS NULL, 1, 0)\n" + "\t\t+ IF((SimplePrefs.HasMedia='Yes'\n"
+      + "\t\t\tAND (PetProfiles.HasPictures IS TRUE)) \n"
+      + "\t\t\tOR SimplePrefs.HasMedia IS NULL, 1, 0)) as MatchScore\n"
       + "\tFROM PetProfiles INNER JOIN \n"
-      + "    (SELECT * FROM SimplePreferences WHERE UserId=?) as User2Prefs\n"
-      + "    ON (PetProfiles.Species=User2Prefs.Species OR User2Prefs.Species IS NULL)\n"
-      + "\t\tAND (PetProfiles.Sex=User2Prefs.Sex OR User2Prefs.Sex IS NULL)\n"
-      + "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', User2Prefs.Breed, '%') \n"
-      + "\t\t\t\tOR User2Prefs.Breed IS NULL)\n"
-      + "\t\tAND ((PetProfiles.Location - User2Prefs.Location) BETWEEN -5 AND 5\n"
-      + "\t\t\tOR User2Prefs.Location IS NULL)\n" + "\tORDER BY MatchScore DESC;";
+      + "    (SELECT * FROM SimplePreferences WHERE UserId=?) as SimplePrefs\n"
+      + "    ON (PetProfiles.Species=SimplePrefs.Species OR SimplePrefs.Species IS NULL)\n"
+      + "\t\tAND (PetProfiles.Sex=SimplePrefs.Sex OR SimplePrefs.Sex IS NULL)\n"
+      + "\t\tAND (PetProfiles.Breed LIKE CONCAT('%', SimplePrefs.Breed, '%') \n"
+      + "\t\t\t\tOR SimplePrefs.Breed IS NULL)\n"
+      + "\t\tAND ((PetProfiles.Location - SimplePrefs.Location) BETWEEN -5 AND 5\n"
+      + "\t\t\tOR SimplePrefs.Location IS NULL)\n" + "\tORDER BY MatchScore DESC;";
 
   private static final String DETAILED_PETS_QUERY =
       SELECT_ALL_FIELDS +
@@ -269,7 +268,7 @@ public class PetProfilesDao {
           "\t\t+ IF(PetProfiles.CoatLength=SimplePrefs.CoatLength OR SimplePrefs.CoatLength IS " +
           "NULL, 1, 0)\n" +
           "\t\t+ IF((SimplePrefs.HasMedia='Yes'\n" +
-          "\t\t\t\tAND (PetProfiles.PicturesId IS NOT NULL OR PetProfiles.VideosId IS NOT NULL)) " +
+          "\t\t\t\tAND (PetProfiles.HasPictures IS TRUE)) " +
           "\n" +
           "\t\t\t\tOR SimplePrefs.HasMedia IS NULL, 1, 0)\n" +
           "\t\t#Detailed Prefs\n" +
@@ -356,5 +355,5 @@ public class PetProfilesDao {
           "\t\tAND ((PetProfiles.Location - SimplePrefs.Location) BETWEEN -5 AND 5\n" +
           "\t\t\tOR SimplePrefs.Location IS NULL)\n" +
           "ORDER BY MatchScore DESC;";
-  
+
 }

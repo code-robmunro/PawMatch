@@ -54,6 +54,14 @@ public class Enums {
     public String toString(){
       return this.code;
     }
+
+    static public Size lookup(String id, Size defaultValue) {
+      try {
+        return Size.valueOf(id);
+      } catch (IllegalArgumentException ex) {
+        return defaultValue;
+      }
+    }
   }
 
   public enum CoatLength{

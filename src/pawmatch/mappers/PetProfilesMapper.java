@@ -18,7 +18,7 @@ public class PetProfilesMapper extends AbstractMapper {
     Enums.Sex sex = Enums.Sex.valueOf(results.getString("Sex").toUpperCase());
     String breed = results.getString("Breed");
     Enums.Age age = Enums.Age.valueOf(parseValue(results, "Age"));
-    Enums.Size size = Enums.Size.valueOf(parseValue(results, "Size"));
+    Enums.Size size = Enums.Size.lookup(results.getString("Size").toUpperCase(), Enums.Size.EMPTY);
     boolean housetrained = results.getBoolean("HouseTrained");
     Enums.CoatLength coatLength = Enums.CoatLength.valueOf(parseValue(results, "CoatLength"));
     String location = results.getString("Location");
@@ -59,6 +59,7 @@ public class PetProfilesMapper extends AbstractMapper {
     boolean eagerToPlease = results.getBoolean("EagerToPlease");
     boolean evenTempered = results.getBoolean("EvenTempered");
     boolean gentle = results.getBoolean("Gentle");
+    boolean hasPictures = results.getBoolean("HasPictures");
 
     PetProfiles profile =
         new PetProfiles(profileId, species, sex, breed, age, size, housetrained, coatLength,
@@ -67,7 +68,7 @@ public class PetProfilesMapper extends AbstractMapper {
             upToDate, obedienceTraining, fee, exerciseNeeds, energyLevel, activityLevel,
             groomingNeeds, shedding, goofy, hypoallergenic, carTrained, leashTrained,
             likesToFetch, likesToys, likesSwimming, likesLaps, apartment, protective, obedient,
-            playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle);
+            playful, timidShy, independent, affectionate, eagerToPlease, evenTempered, gentle, hasPictures);
 
     return profile;
   }
