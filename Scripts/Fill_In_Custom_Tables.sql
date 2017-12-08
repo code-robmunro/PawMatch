@@ -23,7 +23,49 @@ VALUES('user1', 'a', 'b', 'a@b.com', 'asldf', 1, 1, true, false);
         
 INSERT INTO SimplePreferences(Species, Sex, Breed, Age, Size, HouseTrained, CoatLength,
 	HasMedia, Location, ShelteredLonger, UserId)
-VALUES('Dog', 'Female', 'Labrador', 'Young', null, true, 'Short', true, 94582 , null, 1);
+    VALUES('Dog', 'Female', 'Labrador', 'Young', null, true, 'Short', true, 94582 , null, 1);
+
+
+INSERT INTO DetailedPreferences(
+`Color`,
+`Fee`,
+`EnergyLevel`,
+`ActivityLevel`,
+`UserId`,
+`OKWithDogs`,
+`OKWithCats`,
+`OKWithKids`,
+`OKWithAdults`,
+`OKWithFarm`,
+`GoodWithSeniors`,
+`Declawed`,
+`UpToDate`,
+`Pictures`,
+`Videos`,
+`ObedienceTraining`,
+`ExerciseNeeds`,
+`GroomingNeeds`,
+`Shedding`,
+`Goofy`,
+`Hypoallergenic`,
+`CarTrained`,
+`LeashTrained`,
+`LikesToFetch`,
+`LikesToys`,
+`LikesSwimming`,
+`LikesLaps`,
+`Apartment`,
+`Protective`,
+`Obedient`,
+`Playful`,
+`TimidShy`,
+`Independent`,
+`Affectionate`,
+`EagerToPlease`,
+`EvenTempered`,
+`Gentle`)
+VALUES('Brown', 0, 'Low', 'Moderately Active', 1, true, true, true, true, true, true, false, false, true, false, true, null, null, true,
+true, true, true, null, true, true, true, true, true, true, true, true, true, true, true, true, true, true);
 
 INSERT INTO Users (UserName, FirstName, LastName, Email, Password, SimplePreferencesId, DetailedPreferencesId, NotificationsOn, Foster)
 VALUES('user2', 'a', 'b', 'a@b.com', 'asldf', 1, 1, true, false);
@@ -36,6 +78,7 @@ Name, Address, City, State, Zip, Phone, Email, OrgUrl, FacebookUrl, MeetPets, Al
 		(SELECT Name, Address, City, State, Zip, Phone, Email, OrgUrl, FacebookUrl, MeetPets, AllowCommonApp, OrganizationId
         FROM Organizations 
         );
+
 
 CREATE TABLE temp_HasPics AS 
 	SELECT PetProfiles.PetProfileId, IF(PetProfiles.PetProfileId IS NULL, FALSE, TRUE) as HasPictures
